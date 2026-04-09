@@ -45,7 +45,6 @@
         overflow-x: hidden;
       }
 
-      /* ── CURSOR (desktop only) ── */
       @media (pointer: fine) {
         body {
           cursor: none;
@@ -82,7 +81,6 @@
         }
       }
 
-      /* ── GRAIN ── */
       body::after {
         content: "";
         position: fixed;
@@ -93,7 +91,6 @@
         opacity: 0.5;
       }
 
-      /* ── NAV ── */
       nav {
         position: fixed;
         top: 0;
@@ -136,7 +133,6 @@
       .nav-links a:hover {
         color: var(--green-bright);
       }
-
       .nav-flag {
         display: flex;
         gap: 3px;
@@ -147,8 +143,6 @@
         height: 18px;
         border-radius: 1px;
       }
-
-      /* Hamburger */
       .nav-hamburger {
         display: none;
         flex-direction: column;
@@ -178,8 +172,6 @@
       .nav-hamburger.open span:nth-child(3) {
         transform: translateY(-7px) rotate(-45deg);
       }
-
-      /* Mobile nav overlay */
       .nav-mobile {
         display: none;
         position: fixed;
@@ -207,7 +199,6 @@
         color: var(--yellow);
       }
 
-      /* ── HERO ── */
       #hero {
         position: relative;
         min-height: 100vh;
@@ -264,7 +255,6 @@
       .hero-name span {
         color: var(--yellow);
       }
-      /* FIX: clamp corrigé (min 1.5rem < max 2.8rem) */
       .hero-alias {
         font-family: "Playfair Display", serif;
         font-size: clamp(1.5rem, 3vw, 2.8rem);
@@ -327,7 +317,6 @@
           opacity: 1;
         }
       }
-      /* FIX: hero-num caché sur mobile */
       .hero-num {
         position: absolute;
         right: 10px;
@@ -343,7 +332,6 @@
         letter-spacing: -0.05em;
       }
 
-      /* ── ABOUT ── */
       #about {
         padding: 130px 56px;
         display: grid;
@@ -420,8 +408,6 @@
         margin-top: 6px;
         display: block;
       }
-
-      /* Portrait — FIX: image correctement dimensionnée */
       .about-portrait {
         position: sticky;
         top: 100px;
@@ -457,7 +443,6 @@
           transparent 60%
         );
       }
-      /* FIX: L'image remplit correctement le portrait */
       .portrait-inner img {
         width: 100%;
         height: 100%;
@@ -466,7 +451,6 @@
         inset: 0;
         display: block;
       }
-      /* Placeholder si pas d'image */
       .portrait-placeholder {
         font-family: "Playfair Display", serif;
         font-size: 5rem;
@@ -535,7 +519,6 @@
         color: rgba(5, 13, 8, 0.7);
       }
 
-      /* ── PARCOURS ── */
       #parcours {
         padding: 130px 56px;
         background: var(--bg2);
@@ -577,7 +560,6 @@
         font-style: italic;
         color: var(--yellow);
       }
-
       .timeline {
         position: relative;
         display: grid;
@@ -587,9 +569,6 @@
         display: grid;
         grid-template-columns: 110px 1px 1fr;
         gap: 0 32px;
-        transition:
-          opacity 0.7s ease,
-          transform 0.7s ease;
       }
       .tl-year {
         font-family: "Playfair Display", serif;
@@ -613,7 +592,6 @@
         flex-shrink: 0;
         margin-top: 10px;
         z-index: 1;
-        transition: background 0.4s;
       }
       .tl-connector {
         flex: 1;
@@ -649,7 +627,6 @@
         max-width: 600px;
       }
 
-      /* ── SONS ── */
       #sons {
         padding: 130px 56px;
         position: relative;
@@ -775,7 +752,6 @@
         }
       }
 
-      /* ── PLAYER BAR ── */
       #player-bar {
         position: fixed;
         bottom: 0;
@@ -795,8 +771,6 @@
       #player-bar.active {
         transform: translateY(0);
       }
-
-      /* Indicateur audio réel vs simulation */
       .pb-audio-badge {
         font-size: 0.52rem;
         letter-spacing: 0.2em;
@@ -816,7 +790,6 @@
         color: var(--yellow);
         border: 1px solid rgba(245, 197, 24, 0.2);
       }
-
       .pb-info {
         flex: 1;
         min-width: 0;
@@ -936,7 +909,6 @@
         border: none;
       }
 
-      /* ── AWARDS ── */
       #awards {
         padding: 100px 56px;
         background: var(--bg2);
@@ -968,9 +940,6 @@
         background: var(--bg3);
         padding: 32px 28px;
         border: 1px solid transparent;
-        transition:
-          border-color 0.3s,
-          background 0.3s;
       }
       .award-card:hover {
         border-color: var(--border);
@@ -1035,6 +1004,8 @@
       .contact-detail strong {
         color: var(--text);
       }
+
+      /* Formulaire */
       .cf {
         display: flex;
         flex-direction: column;
@@ -1065,6 +1036,10 @@
         resize: vertical;
         min-height: 100px;
       }
+      .cf-honeypot {
+        display: none !important;
+      }
+
       .btn-send {
         display: inline-flex;
         align-items: center;
@@ -1081,7 +1056,8 @@
         cursor: pointer;
         transition:
           background 0.3s,
-          gap 0.3s;
+          gap 0.3s,
+          opacity 0.3s;
         margin-top: 6px;
         align-self: flex-start;
       }
@@ -1089,8 +1065,38 @@
         background: #ffe04a;
         gap: 16px;
       }
+      .btn-send:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        gap: 10px;
+      }
 
-      /* ── FOOTER ── */
+      .cf-success {
+        display: none;
+        padding: 18px 24px;
+        border: 1px solid var(--green-bright);
+        background: rgba(34, 197, 94, 0.07);
+        color: var(--green-bright);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-top: 8px;
+      }
+      .cf-success.visible {
+        display: block;
+      }
+      .cf-error {
+        display: none;
+        padding: 14px 20px;
+        border: 1px solid var(--red);
+        background: rgba(192, 57, 43, 0.07);
+        color: #e74c3c;
+        font-size: 0.85rem;
+        margin-top: 8px;
+      }
+      .cf-error.visible {
+        display: block;
+      }
+
       footer {
         padding: 36px 56px;
         display: flex;
@@ -1130,7 +1136,6 @@
         color: var(--green-bright);
       }
 
-      /* ── KEYFRAMES ── */
       @keyframes fadeUp {
         from {
           opacity: 0;
@@ -1150,8 +1155,6 @@
         }
       }
 
-      /* ── SCROLL REVEAL ── */
-      /* FIX: Les éléments démarrent invisibles et deviennent visibles au scroll */
       .reveal {
         opacity: 0;
         transform: translateY(20px);
@@ -1163,7 +1166,6 @@
         opacity: 1;
         transform: translateY(0);
       }
-
       .tl-item {
         opacity: 0;
         transform: translateY(16px);
@@ -1175,7 +1177,6 @@
         opacity: 1;
         transform: translateY(0);
       }
-
       .award-card {
         opacity: 0;
         transform: translateY(12px);
@@ -1190,21 +1191,17 @@
         transform: translateY(0);
       }
 
-      /* ── RESPONSIVE ── */
       @media (max-width: 880px) {
         nav {
           padding: 20px 24px;
         }
-        .nav-links {
-          display: none;
-        }
+        .nav-links,
         .nav-flag {
           display: none;
         }
         .nav-hamburger {
           display: flex;
         }
-
         #hero {
           padding: 100px 24px 60px;
         }
@@ -1215,7 +1212,6 @@
         .hero-num {
           display: none;
         }
-
         #about {
           grid-template-columns: 1fr;
           padding: 80px 24px;
@@ -1228,22 +1224,17 @@
           grid-template-columns: repeat(3, 1fr);
           gap: 12px;
         }
-
         #parcours,
         #sons,
         #awards,
         #contact {
           padding: 80px 24px;
         }
-        #parcours::before {
-          left: 24px;
-          right: 24px;
-        }
+        #parcours::before,
         #awards::before {
           left: 24px;
           right: 24px;
         }
-
         .tl-item {
           grid-template-columns: 70px 1px 1fr;
           gap: 0 20px;
@@ -1251,12 +1242,10 @@
         .tl-year {
           font-size: 1.1rem;
         }
-
         #contact {
           grid-template-columns: 1fr;
           gap: 40px;
         }
-
         #player-bar {
           padding: 12px 16px;
           gap: 10px;
@@ -1271,7 +1260,6 @@
         .pb-title {
           font-size: 0.85rem;
         }
-
         footer {
           flex-direction: column;
           gap: 16px;
@@ -1291,7 +1279,6 @@
           display: none;
         }
       }
-
       @media (max-width: 480px) {
         .hero-name {
           font-size: clamp(4rem, 18vw, 7rem);
@@ -1325,7 +1312,6 @@
     <div class="cursor" id="cursor"></div>
     <div class="cursor-ring" id="cursorRing"></div>
 
-    <!-- NAV -->
     <nav>
       <a href="#" class="nav-logo">Vano Baby</a>
       <ul class="nav-links">
@@ -1335,19 +1321,16 @@
         <li><a href="#awards">Awards</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <!-- Drapeau Bénin -->
       <div class="nav-flag">
         <div class="flag-stripe" style="background: #008751"></div>
         <div class="flag-stripe" style="background: #fcd116; width: 8px"></div>
         <div class="flag-stripe" style="background: #e8112d; width: 8px"></div>
       </div>
-      <!-- Hamburger mobile -->
       <button class="nav-hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </nav>
 
-    <!-- MOBILE NAV OVERLAY -->
     <nav class="nav-mobile" id="navMobile">
       <a href="#about" class="mobile-link">À propos</a>
       <a href="#parcours" class="mobile-link">Parcours</a>
@@ -1356,7 +1339,6 @@
       <a href="#contact" class="mobile-link">Contact</a>
     </nav>
 
-    <!-- HERO -->
     <section id="hero">
       <div class="hero-bg"></div>
       <div class="hero-num">VB</div>
@@ -1376,7 +1358,6 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
     <section id="about">
       <div class="about-left reveal">
         <p class="section-tag">À propos</p>
@@ -1420,16 +1401,9 @@
           </div>
         </div>
       </div>
-
       <div class="about-portrait reveal" style="transition-delay: 0.2s">
         <div class="portrait-box">
           <div class="portrait-inner">
-            <!--
-              FIX PORTRAIT :
-              Si tu as l'image, remplace "vano.jpeg" par le bon chemin.
-              L'image s'affichera maintenant correctement (object-fit: cover).
-              Si le fichier n'existe pas, le placeholder "VB" s'affiche.
-            -->
             <img
               src="vano.jpeg"
               alt="Vano Baby — Azéto Gbèdé"
@@ -1452,7 +1426,6 @@
       </div>
     </section>
 
-    <!-- PARCOURS -->
     <section id="parcours">
       <div class="section-header reveal">
         <span class="sec-num">02</span>
@@ -1578,7 +1551,6 @@
       </div>
     </section>
 
-    <!-- SONS -->
     <section id="sons">
       <div class="tracks-header reveal">
         <div class="section-header" style="margin-bottom: 0">
@@ -1601,7 +1573,6 @@
       </table>
     </section>
 
-    <!-- AWARDS -->
     <section id="awards">
       <div class="section-header reveal">
         <span class="sec-num">04</span>
@@ -1647,7 +1618,15 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
+    <!-- ══════════════════════════════════════════
+         CONTACT — Formulaire Formspree
+         ──────────────────────────────────────────
+         ⚠️  AVANT DE METTRE EN LIGNE :
+         1. Va sur https://formspree.io et crée un compte
+         2. Crée un nouveau formulaire (New Form)
+         3. Copie l'ID généré (ex: xvgpkjrd)
+         4. Remplace "VOTRE_ID_FORMSPREE" ci-dessous par cet ID
+         ══════════════════════════════════════════ -->
     <section id="contact">
       <div class="contact-left reveal">
         <p class="section-tag">Contact</p>
@@ -1686,15 +1665,55 @@
           <span>Label : <strong>Azéto Gbèdé Music</strong></span>
         </div>
       </div>
-      <div class="cf reveal" style="transition-delay: 0.2s">
-        <input type="text" placeholder="Votre nom / organisation" />
-        <input type="email" placeholder="Email professionnel" />
+
+      <form
+        class="cf reveal"
+        style="transition-delay: 0.2s"
+        id="contactForm"
+        action="https://formspree.io/f/VOTRE_ID_FORMSPREE"
+        method="POST"
+        novalidate
+      >
+        <!-- Honeypot anti-spam -->
         <input
           type="text"
-          placeholder="Type de demande (Booking, Collab, Presse…)"
+          name="_gotcha"
+          class="cf-honeypot"
+          tabindex="-1"
+          autocomplete="off"
         />
-        <textarea placeholder="Détails de votre proposition…"></textarea>
-        <button class="btn-send">
+        <!-- Sujet de l'email reçu -->
+        <input
+          type="hidden"
+          name="_subject"
+          value="Nouvelle demande — Site VANO BABY"
+        />
+
+        <input
+          type="text"
+          name="nom"
+          placeholder="Votre nom / organisation"
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email professionnel"
+          required
+        />
+        <input
+          type="text"
+          name="demande"
+          placeholder="Type de demande (Booking, Collab, Presse…)"
+          required
+        />
+        <textarea
+          name="message"
+          placeholder="Détails de votre proposition…"
+          required
+        ></textarea>
+
+        <button type="submit" class="btn-send" id="submitBtn">
           Envoyer la demande
           <svg
             width="12"
@@ -1708,14 +1727,25 @@
             <polyline points="12 5 19 12 12 19" />
           </svg>
         </button>
-      </div>
+
+        <div class="cf-success" id="cfSuccess">
+          ✓ &nbsp;Votre demande a bien été envoyée. L'équipe Azéto Gbèdé Music
+          vous répondra sous 48h.
+        </div>
+        <div class="cf-error" id="cfError">
+          Une erreur est survenue. Veuillez réessayer ou contacter directement
+          le label.
+        </div>
+      </form>
     </section>
 
-    <!-- FOOTER -->
     <footer>
       <span class="footer-logo">Vano Baby</span>
       <div class="social-row">
-        <a href="#">Instagram</a>
+        <a
+          href="https://www.facebook.com/people/VANO-BABY-Officiel/100044293546221/#"
+          >Facebook</a
+        >
         <a href="#">Spotify</a>
         <a href="#">YouTube</a>
         <a href="#">Deezer</a>
@@ -1724,7 +1754,6 @@
       <p class="footer-copy">© 2025 Azéto Gbèdé Music — Tous droits réservés</p>
     </footer>
 
-    <!-- PLAYER BAR -->
     <div id="player-bar">
       <div class="pb-info">
         <p class="pb-title" id="pbTitle">—</p>
@@ -1807,9 +1836,7 @@
     </div>
 
     <script>
-      /* ══════════════════════════════════════
-         CURSOR (desktop uniquement)
-      ══════════════════════════════════════ */
+      /* ── CURSOR ── */
       const cur = document.getElementById("cursor");
       const ring = document.getElementById("cursorRing");
       if (cur && ring) {
@@ -1828,9 +1855,7 @@
         })();
       }
 
-      /* ══════════════════════════════════════
-         HAMBURGER MENU
-      ══════════════════════════════════════ */
+      /* ── HAMBURGER ── */
       const hamburger = document.getElementById("hamburger");
       const navMobile = document.getElementById("navMobile");
       hamburger.addEventListener("click", () => {
@@ -1844,11 +1869,7 @@
         });
       });
 
-      /* ══════════════════════════════════════
-         SCROLL REVEAL
-         FIX: l'observer ajoute "visible", les éléments
-         démarrent avec opacity:0 via CSS.
-      ══════════════════════════════════════ */
+      /* ── SCROLL REVEAL ── */
       const obs = new IntersectionObserver(
         (entries) => {
           entries.forEach((e) => {
@@ -1862,30 +1883,59 @@
         .forEach((el) => obs.observe(el));
 
       /* ══════════════════════════════════════
-         TRACKS DATA
-         ─────────────────────────────────────
-         COMMENT AJOUTER LES SONS :
-         
-         Pour chaque piste, ajoute un champ "audioSrc"
-         avec le chemin vers ton fichier MP3/OGG/AAC.
-         
-         Exemples :
-           audioSrc: "audio/fite.mp3"
-           audioSrc: "https://monserveur.com/audio/diyo.mp3"
-         
-         Si audioSrc est vide (""), le lecteur simule
-         la lecture (comportement actuel).
-         
-         Formats supportés : MP3, OGG, AAC, WAV, FLAC
+         FORMULAIRE CONTACT — Envoi AJAX Formspree
+         Reste sur la page, affiche confirmation.
       ══════════════════════════════════════ */
+      const contactForm = document.getElementById("contactForm");
+      const submitBtn = document.getElementById("submitBtn");
+      const cfSuccess = document.getElementById("cfSuccess");
+      const cfError = document.getElementById("cfError");
+
+      contactForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const nom = contactForm.querySelector('[name="nom"]').value.trim();
+        const email = contactForm.querySelector('[name="email"]').value.trim();
+        const message = contactForm
+          .querySelector('[name="message"]')
+          .value.trim();
+        if (!nom || !email || !message) return;
+
+        cfSuccess.classList.remove("visible");
+        cfError.classList.remove("visible");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Envoi en cours…";
+
+        try {
+          const response = await fetch(contactForm.action, {
+            method: "POST",
+            body: new FormData(contactForm),
+            headers: { Accept: "application/json" },
+          });
+          if (response.ok) {
+            contactForm.reset();
+            cfSuccess.classList.add("visible");
+            cfSuccess.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          } else {
+            cfError.classList.add("visible");
+          }
+        } catch {
+          cfError.classList.add("visible");
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `Envoyer la demande <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
+        }
+      });
+
+      /* ── TRACKS ── */
       const tracks = [
         {
-          title: "Bô_Ébi",
+          title: "Bô_Ébi",
           feat: "",
           genre: "Afrobeat",
           year: "2023",
           dur: "3:41",
-          audioSrc: "sons/Bô_Ébi.mp3",
+          audioSrc: "sons/Bô_Ébi.mp3",
         },
         {
           title: "Do Bandi Min",
@@ -2121,17 +2171,14 @@
         },
       ];
 
-      /* ══════════════════════════════════════
-         PLAYER — HTML5 Audio + Simulation fallback
-      ══════════════════════════════════════ */
+      /* ── PLAYER ── */
       let audioEl = new Audio();
-      let current = null;
-      let playing = false;
-      let elapsed = 0;
-      let duration = 0;
-      let simTimer = null;
-      let usingReal = false; // true = fichier audio réel, false = simulation
-
+      let current = null,
+        playing = false,
+        elapsed = 0,
+        duration = 0;
+      let simTimer = null,
+        usingReal = false;
       audioEl.volume = 0.8;
 
       function parseDur(s) {
@@ -2150,10 +2197,7 @@
             (t, i) => `
           <tr class="track-row" id="tr${i}" onclick="playTrack(${i})">
             <td><span class="track-num" id="tn${i}">${String(i + 1).padStart(2, "0")}</span></td>
-            <td>
-              <span class="track-name">${t.title}</span>
-              ${t.feat ? `<span class="track-feat">${t.feat}</span>` : ""}
-            </td>
+            <td><span class="track-name">${t.title}</span>${t.feat ? `<span class="track-feat">${t.feat}</span>` : ""}</td>
             <td class="hide-mobile"><span class="track-genre-pill">${t.genre}</span></td>
             <td class="hide-mobile"><span class="track-dur">${t.year}</span></td>
             <td><span class="track-dur">${t.dur}</span></td>
@@ -2180,20 +2224,17 @@
         document.getElementById("pbFill").style.width = "0%";
       }
 
-      /* ── Lecteur Audio Réel ── */
       function startRealAudio(src) {
         stopSimulation();
         audioEl.src = src;
         audioEl.load();
         audioEl.play().catch(() => {
-          // Autoplay bloqué par le navigateur → fallback simulation
           startSimulation();
         });
         usingReal = true;
         playing = true;
         updateBadge();
         updateIcon();
-
         audioEl.ontimeupdate = () => {
           if (audioEl.duration) {
             elapsed = audioEl.currentTime;
@@ -2211,7 +2252,6 @@
         };
       }
 
-      /* ── Simulation (fallback quand pas de fichier) ── */
       function startSimulation() {
         usingReal = false;
         playing = true;
@@ -2239,19 +2279,14 @@
       }
 
       function playTrack(idx) {
-        // Arrêter la piste en cours
         audioEl.pause();
         stopSimulation();
         elapsed = 0;
-
         setTrackUI(idx);
         const t = tracks[idx];
-
         if (t.audioSrc) {
-          // ✅ Fichier audio fourni → lecture réelle
           startRealAudio(t.audioSrc);
         } else {
-          // ⚡ Pas de fichier → simulation
           startSimulation();
         }
       }
@@ -2280,7 +2315,6 @@
         updateBadge();
       }
 
-      /* FIX prevTrack : redémarre correctement le timer */
       function prevTrack() {
         if (current === null) return;
         if (elapsed < 3) {
@@ -2323,16 +2357,8 @@
 
       function updateBadge() {
         const badge = document.getElementById("pbBadge");
-        if (usingReal && playing) {
-          badge.textContent = "audio";
-          badge.className = "pb-audio-badge real";
-        } else if (!usingReal && playing) {
-          badge.textContent = "simulation";
-          badge.className = "pb-audio-badge sim";
-        } else {
-          badge.textContent = usingReal ? "audio" : "simulation";
-          badge.className = "pb-audio-badge " + (usingReal ? "real" : "sim");
-        }
+        badge.textContent = usingReal ? "audio" : "simulation";
+        badge.className = "pb-audio-badge " + (usingReal ? "real" : "sim");
       }
 
       renderTracks();
