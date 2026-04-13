@@ -44,7 +44,6 @@
         overflow-x: hidden;
       }
 
-      /* ── SCROLL PROGRESS BAR ── */
       #scroll-progress {
         position: fixed;
         top: 0;
@@ -60,7 +59,6 @@
         transition: width 0.05s linear;
       }
 
-      /* ── CUSTOM CURSOR ── */
       @media (pointer: fine) {
         body {
           cursor: none;
@@ -120,7 +118,6 @@
         opacity: 0.5;
       }
 
-      /* ── NAV ── */
       nav {
         position: fixed;
         top: 0;
@@ -256,7 +253,6 @@
         color: var(--yellow);
       }
 
-      /* ── HERO ── */
       #hero {
         position: relative;
         min-height: 100vh;
@@ -283,7 +279,6 @@
           var(--bg);
         will-change: transform;
       }
-      /* Floating particles */
       .hero-particles {
         position: absolute;
         inset: 0;
@@ -432,7 +427,6 @@
         will-change: transform;
       }
 
-      /* ── SECTION COMMONS ── */
       .section-tag {
         font-size: 0.62rem;
         letter-spacing: 0.4em;
@@ -472,7 +466,6 @@
         color: var(--yellow);
       }
 
-      /* ── ABOUT ── */
       #about {
         padding: 130px 56px;
         display: grid;
@@ -523,7 +516,6 @@
         color: var(--yellow);
         display: block;
         line-height: 1;
-        /* Counter animation target */
       }
       .stat-label {
         font-size: 0.6rem;
@@ -664,7 +656,6 @@
         color: rgba(5, 13, 8, 0.7);
       }
 
-      /* ── PARCOURS ── */
       #parcours {
         padding: 130px 56px;
         background: var(--bg2);
@@ -759,11 +750,54 @@
         max-width: 600px;
       }
 
-      /* ── SONS ── */
-      #sons {
-        padding: 130px 56px;
+      /* SONS TABS */
+      .sons-tabs {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 48px;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 16px;
+      }
+      .son-tab {
+        background: transparent;
+        border: none;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 0.85rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        padding: 8px 24px;
+        cursor: pointer;
+        transition: all 0.3s ease;
         position: relative;
       }
+      .son-tab::after {
+        content: "";
+        position: absolute;
+        bottom: -17px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--yellow);
+        transition: width 0.3s ease;
+      }
+      .son-tab.active {
+        color: var(--yellow);
+      }
+      .son-tab.active::after {
+        width: 100%;
+      }
+      .son-tab:hover {
+        color: var(--green-bright);
+      }
+      .son-tab-content {
+        display: none;
+        animation: fadeIn 0.5s ease;
+      }
+      .son-tab-content.active {
+        display: block;
+      }
+
       .tracks-header {
         display: flex;
         align-items: baseline;
@@ -859,18 +893,6 @@
         color: var(--text-muted);
         font-family: "Playfair Display", serif;
       }
-      /* Video badge */
-      .track-video-badge {
-        font-size: 0.5rem;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        padding: 2px 7px;
-        border: 1px solid rgba(245, 197, 24, 0.4);
-        color: var(--yellow);
-        margin-left: 8px;
-        vertical-align: middle;
-        opacity: 0.7;
-      }
       .mini-bars {
         display: inline-flex;
         align-items: flex-end;
@@ -901,7 +923,6 @@
         }
       }
 
-      /* Voir plus button */
       .voir-plus-wrap {
         text-align: center;
         margin-top: 32px;
@@ -943,7 +964,97 @@
         display: table-row-group;
       }
 
-      /* ── VIDEO MODAL ── */
+      /* VIDEOS GRID */
+      .videos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 30px;
+        margin-top: 20px;
+      }
+      .video-card {
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        overflow: hidden;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      .video-card:hover {
+        border-color: var(--yellow);
+        transform: translateY(-5px);
+      }
+      .video-thumbnail {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+        background: #000;
+        overflow: hidden;
+      }
+      .video-thumbnail img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+      .video-card:hover .video-thumbnail img {
+        transform: scale(1.05);
+      }
+      .video-play-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        background: rgba(245, 197, 24, 0.9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 2;
+      }
+      .video-card:hover .video-play-overlay {
+        opacity: 1;
+      }
+      .video-play-overlay svg {
+        width: 24px;
+        height: 24px;
+        margin-left: 4px;
+      }
+      .video-info {
+        padding: 20px;
+      }
+      .video-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+        color: var(--text);
+      }
+      .video-feat {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        font-style: italic;
+        margin-bottom: 10px;
+      }
+      .video-meta {
+        display: flex;
+        gap: 15px;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--green-bright);
+      }
+      .video-duration {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
       .modal-overlay {
         display: none;
         position: fixed;
@@ -1029,7 +1140,6 @@
         margin-top: 4px;
       }
 
-      /* ── PLAYER BAR ── */
       #player-bar {
         position: fixed;
         bottom: 0;
@@ -1187,7 +1297,6 @@
         border: none;
       }
 
-      /* ── AWARDS ── */
       #awards {
         padding: 100px 56px;
         background: var(--bg2);
@@ -1252,9 +1361,6 @@
         color: var(--text-muted);
       }
 
-      /* ═══════════════════════════════════════
-         ÉVÉNEMENTS SECTION
-      ════════════════════════════════════════ */
       #evenements {
         padding: 130px 56px;
         position: relative;
@@ -1414,39 +1520,12 @@
         color: rgba(245, 197, 24, 0.6);
       }
 
-      /* ══════════════════════════════════════
-         CONTACT
-      ════════════════════════════════════════ */
       #contact {
         padding: 130px 56px;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 80px;
         align-items: start;
-      }
-      #contact::before {
-        content: "";
-        display: block;
-        grid-column: 1/-1;
-        height: 0; /* separator handled in section */
-      }
-      .contact-section-wrap {
-        position: relative;
-      }
-      .contact-section-wrap::before {
-        content: "";
-        position: absolute;
-        top: -130px;
-        left: -56px;
-        right: -56px;
-        height: 1px;
-        background: linear-gradient(
-          to right,
-          transparent,
-          var(--green),
-          transparent
-        );
-        opacity: 0.3;
       }
       .contact-left h2 {
         font-family: "Playfair Display", serif;
@@ -1476,7 +1555,6 @@
       .contact-detail strong {
         color: var(--text);
       }
-      /* Explication Formspree */
       .formspree-notice {
         margin-top: 28px;
         padding: 16px 20px;
@@ -1509,7 +1587,6 @@
         margin-bottom: 4px;
         line-height: 1.5;
       }
-      /* Formulaire */
       .cf {
         display: flex;
         flex-direction: column;
@@ -1599,7 +1676,6 @@
         display: block;
       }
 
-      /* ── FOOTER ── */
       footer {
         padding: 36px 56px;
         display: flex;
@@ -1639,7 +1715,6 @@
         color: var(--green-bright);
       }
 
-      /* ── ANIMATIONS ── */
       @keyframes fadeUp {
         from {
           opacity: 0;
@@ -1658,28 +1733,7 @@
           opacity: 1;
         }
       }
-      @keyframes slideInLeft {
-        from {
-          opacity: 0;
-          transform: translateX(-40px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-      @keyframes slideInRight {
-        from {
-          opacity: 0;
-          transform: translateX(40px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
 
-      /* ── REVEAL SYSTEM ── */
       .reveal {
         opacity: 0;
         transform: translateY(24px);
@@ -1761,7 +1815,94 @@
         transform: translateY(0);
       }
 
-      /* ── RESPONSIVE ── */
+      /* CARROUSEL */
+      .portrait-inner {
+        position: relative;
+        overflow: hidden;
+      }
+      .carousel-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.6s ease-in-out;
+        z-index: 0;
+      }
+      .carousel-img.active {
+        opacity: 1;
+        z-index: 1;
+      }
+      .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        color: white;
+        border: 1px solid var(--yellow);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 24px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        transition: all 0.3s ease;
+        opacity: 0;
+        font-family: monospace;
+      }
+      .portrait-inner:hover .carousel-btn {
+        opacity: 0.8;
+      }
+      .carousel-btn:hover {
+        background: var(--yellow);
+        color: var(--bg);
+        opacity: 1 !important;
+        transform: translateY(-50%) scale(1.05);
+      }
+      .carousel-btn.prev {
+        left: 15px;
+      }
+      .carousel-btn.next {
+        right: 15px;
+      }
+      .carousel-dots {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.4);
+        padding: 8px 15px;
+        border-radius: 30px;
+        backdrop-filter: blur(4px);
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .dot.active {
+        background: var(--yellow);
+        width: 24px;
+        border-radius: 4px;
+      }
+      .dot:hover {
+        background: var(--yellow);
+        transform: scale(1.2);
+      }
+
       @media (max-width: 880px) {
         nav {
           padding: 20px 24px;
@@ -1856,6 +1997,25 @@
         .events-grid {
           grid-template-columns: 1fr;
         }
+        .videos-grid {
+          grid-template-columns: 1fr;
+        }
+        .son-tab {
+          font-size: 0.7rem;
+          padding: 6px 16px;
+        }
+        .carousel-btn {
+          width: 32px;
+          height: 32px;
+          font-size: 18px;
+          opacity: 0.6;
+        }
+        .carousel-btn.prev {
+          left: 8px;
+        }
+        .carousel-btn.next {
+          right: 8px;
+        }
       }
       @media (max-width: 480px) {
         .hero-name {
@@ -1887,13 +2047,10 @@
     </style>
   </head>
   <body>
-    <!-- Scroll progress -->
     <div id="scroll-progress"></div>
-
     <div class="cursor" id="cursor"></div>
     <div class="cursor-ring" id="cursorRing"></div>
 
-    <!-- ── NAV ── -->
     <nav id="mainNav">
       <a href="#" class="nav-logo">Vano Baby</a>
       <ul class="nav-links">
@@ -1922,7 +2079,6 @@
       <a href="#contact" class="mobile-link">Contact</a>
     </nav>
 
-    <!-- ── HERO ── -->
     <section id="hero">
       <div class="hero-bg" id="heroBg"></div>
       <div class="hero-particles" id="heroParticles"></div>
@@ -1943,7 +2099,6 @@
       </div>
     </section>
 
-    <!-- ── ABOUT ── -->
     <section id="about">
       <div class="about-left reveal-left">
         <p class="section-tag">À propos</p>
@@ -1972,41 +2127,77 @@
         </p>
         <div class="about-stats">
           <div>
-            <span class="stat-num" data-target="10" data-suffix="+">0</span>
-            <span class="stat-label">Ans de carrière</span>
+            <span class="stat-num" data-target="10" data-suffix="+">0</span
+            ><span class="stat-label">Ans de carrière</span>
           </div>
           <div>
-            <span
-              class="stat-num"
-              data-target="3"
-              data-prefix=""
-              data-suffix="×"
-              >0</span
-            >
-            <span class="stat-label">Meilleur artiste</span>
+            <span class="stat-num" data-target="3" data-suffix="×">0</span
+            ><span class="stat-label">Meilleur artiste</span>
           </div>
           <div>
-            <span class="stat-num">BJ</span>
-            <span class="stat-label">Bénin &amp; beyond</span>
+            <span class="stat-num">BJ</span
+            ><span class="stat-label">Bénin &amp; beyond</span>
           </div>
         </div>
       </div>
       <div class="about-portrait reveal-right" style="transition-delay: 0.2s">
         <div class="portrait-box">
-          <div class="portrait-inner">
+          <div class="portrait-inner" id="portraitCarousel">
             <img
-              src="vano.jpeg"
-              alt="Vano Baby — Azéto Gbèdé"
+              class="carousel-img active"
+              src="vano1.jpg"
+              alt="Vano Baby 1"
               onerror="
-                this.style.display = 'none';
-                this.nextElementSibling.style.display = 'block';
+                this.src =
+                  'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'800\' viewBox=\'0 0 800 800\'%3E%3Crect fill=\'%231a7a4a\' width=\'800\' height=\'800\'/%3E%3Ctext fill=\'%23f5c518\' font-family=\'serif\' font-size=\'120\' x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\'%3EVB%3C/text%3E%3C/svg%3E'
               "
             />
-            <span class="portrait-placeholder" style="display: none">VB</span>
+            <img
+              class="carousel-img"
+              src="vano2.jpg"
+              alt="Vano Baby 2"
+              onerror="
+                this.src =
+                  'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'800\' viewBox=\'0 0 800 800\'%3E%3Crect fill=\'%231a7a4a\' width=\'800\' height=\'800\'/%3E%3Ctext fill=\'%23f5c518\' font-family=\'serif\' font-size=\'120\' x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\'%3EVB%3C/text%3E%3C/svg%3E'
+              "
+            />
+            <img
+              class="carousel-img"
+              src="vano3.jpg"
+              alt="Vano Baby 3"
+              onerror="
+                this.src =
+                  'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'800\' viewBox=\'0 0 800 800\'%3E%3Crect fill=\'%231a7a4a\' width=\'800\' height=\'800\'/%3E%3Ctext fill=\'%23f5c518\' font-family=\'serif\' font-size=\'120\' x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\'%3EVB%3C/text%3E%3C/svg%3E'
+              "
+            />
+            <img
+              class="carousel-img"
+              src="vano4.jpg"
+              alt="Vano Baby 4"
+              onerror="
+                this.src =
+                  'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'800\' viewBox=\'0 0 800 800\'%3E%3Crect fill=\'%231a7a4a\' width=\'800\' height=\'800\'/%3E%3Ctext fill=\'%23f5c518\' font-family=\'serif\' font-size=\'120\' x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\'%3EVB%3C/text%3E%3C/svg%3E'
+              "
+            />
             <div class="portrait-corner tl"></div>
             <div class="portrait-corner tr"></div>
             <div class="portrait-corner bl"></div>
             <div class="portrait-corner br"></div>
+            <button
+              class="carousel-btn prev"
+              id="carouselPrev"
+              aria-label="Image précédente"
+            >
+              ‹
+            </button>
+            <button
+              class="carousel-btn next"
+              id="carouselNext"
+              aria-label="Image suivante"
+            >
+              ›
+            </button>
+            <div class="carousel-dots" id="carouselDots"></div>
           </div>
           <div class="portrait-badge">
             <span class="portrait-badge-name">Vano Baby</span>
@@ -2016,7 +2207,6 @@
       </div>
     </section>
 
-    <!-- ── PARCOURS ── -->
     <section id="parcours">
       <div class="section-header reveal">
         <span class="sec-num">02</span>
@@ -2142,50 +2332,91 @@
       </div>
     </section>
 
-    <!-- ── SONS ── -->
+    <!-- SECTION SONS AVEC ONGLETS AUDIO/VIDEO -->
     <section id="sons">
-      <div class="tracks-header reveal">
-        <div class="section-header" style="margin-bottom: 0">
-          <span class="sec-num">03</span>
-          <h2 class="sec-title">Ses <em>Sons</em></h2>
-        </div>
-        <span class="tracks-hint">Cliquer pour écouter · 🎬 = Clip vidéo</span>
+      <div class="section-header reveal">
+        <span class="sec-num">03</span>
+        <h2 class="sec-title">Ses <em>Sons</em></h2>
       </div>
-      <table class="tracks-table" id="tracksTable">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Titre</th>
-            <th class="hide-mobile">Genre</th>
-            <th class="hide-mobile">Année</th>
-            <th>Durée</th>
-          </tr>
-        </thead>
-        <tbody id="tracksTbody"></tbody>
-        <tbody class="tracks-extra" id="tracksExtra"></tbody>
-      </table>
-      <div class="voir-plus-wrap">
-        <button
-          class="btn-voir-plus"
-          id="voirPlusBtn"
-          onclick="toggleVoirPlus()"
+
+      <div class="sons-tabs">
+        <button class="son-tab active" data-tab="audio">🎵 Audio</button>
+        <button class="son-tab" data-tab="video">🎬 Vidéos</button>
+      </div>
+
+      <div id="audio-tab" class="son-tab-content active">
+        <div class="tracks-header">
+          <div class="section-header" style="margin-bottom: 0">
+            <span class="sec-num">🎵</span>
+            <h3 class="sec-title" style="font-size: 1.8rem">
+              Morceaux <em>Audio</em>
+            </h3>
+          </div>
+          <span class="tracks-hint">Cliquer pour écouter</span>
+        </div>
+        <table class="tracks-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Titre</th>
+              <th class="hide-mobile">Genre</th>
+              <th class="hide-mobile">Année</th>
+              <th>Durée</th>
+            </tr>
+          </thead>
+          <tbody id="audioTracksTbody"></tbody>
+          <tbody class="tracks-extra" id="audioTracksExtra"></tbody>
+        </table>
+        <div class="voir-plus-wrap">
+          <button class="btn-voir-plus" id="audioVoirPlusBtn">
+            <span id="audioVoirPlusLabel">Voir plus de morceaux</span
+            ><svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="video-tab" class="son-tab-content">
+        <div class="tracks-header">
+          <div class="section-header" style="margin-bottom: 0">
+            <span class="sec-num">🎬</span>
+            <h3 class="sec-title" style="font-size: 1.8rem">
+              Clips <em>Vidéo</em>
+            </h3>
+          </div>
+          <span class="tracks-hint">Cliquer pour regarder le clip</span>
+        </div>
+        <div class="videos-grid" id="videosGrid"></div>
+        <div
+          class="voir-plus-wrap"
+          id="videoVoirPlusWrap"
+          style="display: none"
         >
-          <span id="voirPlusLabel">Voir plus de sons</span>
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-          >
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
-        </button>
+          <button class="btn-voir-plus" id="videoVoirPlusBtn">
+            <span id="videoVoirPlusLabel">Voir plus de vidéos</span
+            ><svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
 
-    <!-- ── AWARDS ── -->
     <section id="awards">
       <div class="section-header reveal">
         <span class="sec-num">04</span>
@@ -2231,22 +2462,12 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         ÉVÉNEMENTS PASSÉS
-         ──────────────────────────────────────
-         Pour personnaliser :
-         • Remplacez les src="..." des images par vos vraies photos d'événements
-         • Pour les vidéos locales : changez data-video-src="..." vers votre fichier .mp4
-         • Pour les vidéos YouTube : changez data-video-type="youtube" et
-           data-video-src="https://www.youtube.com/embed/VOTRE_ID"
-    ══════════════════════════════════════ -->
     <section id="evenements">
       <div class="section-header reveal">
         <span class="sec-num">05</span>
         <h2 class="sec-title">Événements <em>Passés</em></h2>
       </div>
-      <div class="events-grid" id="eventsGrid">
-        <!-- ÉVÉNEMENT 1 -->
+      <div class="events-grid">
         <div
           class="event-card reveal-scale"
           data-video-type="youtube"
@@ -2260,14 +2481,12 @@
                 this.src =
                   'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'450\' viewBox=\'0 0 800 450\'%3E%3Crect fill=\'%230d160f\' width=\'800\' height=\'450\'/%3E%3Ctext fill=\'%231a7a4a\' font-family=\'serif\' font-size=\'72\' x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\'%3E2022%3C/text%3E%3C/svg%3E'
               "
-              alt="Concert Cotonou 2022"
             />
             <div class="event-media-overlay"></div>
-            <span class="event-year-badge">2022</span>
-            <button
+            <span class="event-year-badge">2022</span
+            ><button
               class="event-play-btn"
               onclick="openEventVideo(this.closest('.event-card'))"
-              aria-label="Voir la vidéo"
             >
               <svg
                 width="18"
@@ -2282,8 +2501,8 @@
           <div class="event-body">
             <h3 class="event-name">Grand Concert de Cotonou</h3>
             <div class="event-meta">
-              <span>
-                <svg
+              <span
+                ><svg
                   width="11"
                   height="11"
                   viewBox="0 0 24 24"
@@ -2292,12 +2511,10 @@
                   stroke-width="2"
                 >
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-                Cotonou, Bénin
-              </span>
-              <span>
-                <svg
+                  <circle cx="12" cy="10" r="3" /></svg
+                >Cotonou, Bénin</span
+              ><span
+                ><svg
                   width="11"
                   height="11"
                   viewBox="0 0 24 24"
@@ -2308,27 +2525,22 @@
                   <rect x="3" y="4" width="18" height="18" rx="2" />
                   <line x1="16" y1="2" x2="16" y2="6" />
                   <line x1="8" y1="2" x2="8" y2="6" />
-                  <line x1="3" y1="10" x2="21" y2="10" />
-                </svg>
-                Décembre 2022
-              </span>
+                  <line x1="3" y1="10" x2="21" y2="10" /></svg
+                >Décembre 2022</span
+              >
             </div>
             <p class="event-desc">
               Un concert monstre à guichets fermés rassemblant plus de 5 000
               fans. VANO BABY y a interprété ses plus grands succès dont
-              <em>DIYO</em>, <em>Enfant de Dieu</em> et <em>Piment</em>, offrant
-              une performance scénique époustouflante saluée par toute la presse
-              culturelle béninoise.
+              <em>DIYO</em>, <em>Enfant de Dieu</em> et <em>Piment</em>.
             </p>
             <div class="event-tags">
-              <span class="event-tag">Concert</span>
-              <span class="event-tag">5 000+ fans</span>
-              <span class="event-tag">Live</span>
+              <span class="event-tag">Concert</span
+              ><span class="event-tag">5 000+ fans</span
+              ><span class="event-tag">Live</span>
             </div>
           </div>
         </div>
-
-        <!-- ÉVÉNEMENT 2 -->
         <div
           class="event-card reveal-scale"
           style="transition-delay: 0.1s"
@@ -2343,14 +2555,12 @@
                 this.src =
                   'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'450\' viewBox=\'0 0 800 450\'%3E%3Crect fill=\'%230d160f\' width=\'800\' height=\'450\'/%3E%3Ctext fill=\'%23f5c518\' font-family=\'serif\' font-size=\'72\' x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\'%3E2021%3C/text%3E%3C/svg%3E'
               "
-              alt="Bénin Top 10 Awards 2021"
             />
             <div class="event-media-overlay"></div>
-            <span class="event-year-badge">2021</span>
-            <button
+            <span class="event-year-badge">2021</span
+            ><button
               class="event-play-btn"
               onclick="openEventVideo(this.closest('.event-card'))"
-              aria-label="Voir la vidéo"
             >
               <svg
                 width="18"
@@ -2365,8 +2575,8 @@
           <div class="event-body">
             <h3 class="event-name">Bénin Top 10 Awards 2021</h3>
             <div class="event-meta">
-              <span>
-                <svg
+              <span
+                ><svg
                   width="11"
                   height="11"
                   viewBox="0 0 24 24"
@@ -2375,12 +2585,10 @@
                   stroke-width="2"
                 >
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-                Cotonou, Bénin
-              </span>
-              <span>
-                <svg
+                  <circle cx="12" cy="10" r="3" /></svg
+                >Cotonou, Bénin</span
+              ><span
+                ><svg
                   width="11"
                   height="11"
                   viewBox="0 0 24 24"
@@ -2391,209 +2599,25 @@
                   <rect x="3" y="4" width="18" height="18" rx="2" />
                   <line x1="16" y1="2" x2="16" y2="6" />
                   <line x1="8" y1="2" x2="8" y2="6" />
-                  <line x1="3" y1="10" x2="21" y2="10" />
-                </svg>
-                2021
-              </span>
+                  <line x1="3" y1="10" x2="21" y2="10" /></svg
+                >2021</span
+              >
             </div>
             <p class="event-desc">
               Lors de la cérémonie des Bénin Top 10 Awards, VANO BABY monte sur
               scène pour recevoir le titre de
-              <strong>Meilleur Artiste de l'Année</strong>. Une nuit mémorable
-              qui consacre officiellement son règne sur la musique urbaine
-              béninoise.
+              <strong>Meilleur Artiste de l'Année</strong>.
             </p>
             <div class="event-tags">
-              <span class="event-tag">Awards</span>
-              <span class="event-tag">Meilleur Artiste</span>
-              <span class="event-tag">Cérémonie</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- ÉVÉNEMENT 3 -->
-        <div
-          class="event-card reveal-scale"
-          style="transition-delay: 0.2s"
-          data-video-type="local"
-          data-video-src="evenements/festival2023.mp4"
-          data-video-title="Festival Cotonou Urban 2023"
-        >
-          <div class="event-media">
-            <img
-              src="evenements/festival2023.jpg"
-              onerror="
-                this.src =
-                  'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'450\' viewBox=\'0 0 800 450\'%3E%3Crect fill=\'%230d160f\' width=\'800\' height=\'450\'/%3E%3Ctext fill=\'%2322c55e\' font-family=\'serif\' font-size=\'72\' x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\'%3E2023%3C/text%3E%3C/svg%3E'
-              "
-              alt="Festival Cotonou Urban 2023"
-            />
-            <div class="event-media-overlay"></div>
-            <span class="event-year-badge">2023</span>
-            <button
-              class="event-play-btn"
-              onclick="openEventVideo(this.closest('.event-card'))"
-              aria-label="Voir la vidéo"
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <polygon points="5 3 19 12 5 21" />
-              </svg>
-            </button>
-          </div>
-          <div class="event-body">
-            <h3 class="event-name">Cotonou Urban Festival 2023</h3>
-            <div class="event-meta">
-              <span>
-                <svg
-                  width="11"
-                  height="11"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-                Cotonou, Bénin
-              </span>
-              <span>
-                <svg
-                  width="11"
-                  height="11"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <rect x="3" y="4" width="18" height="18" rx="2" />
-                  <line x1="16" y1="2" x2="16" y2="6" />
-                  <line x1="8" y1="2" x2="8" y2="6" />
-                  <line x1="3" y1="10" x2="21" y2="10" />
-                </svg>
-                Août 2023
-              </span>
-            </div>
-            <p class="event-desc">
-              Tête d'affiche du Cotonou Urban Festival, VANO BABY partage la
-              scène avec plusieurs artistes de la sous-région. Son set
-              électrisant de 90 minutes avec des reprises live de
-              <em>Bô_Ébi</em>, <em>MAHU-SI</em> et <em>C'est Toi</em> restera
-              gravé dans les mémoires.
-            </p>
-            <div class="event-tags">
-              <span class="event-tag">Festival</span>
-              <span class="event-tag">Tête d'affiche</span>
-              <span class="event-tag">90 min</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- ÉVÉNEMENT 4 -->
-        <div
-          class="event-card reveal-scale"
-          style="transition-delay: 0.3s"
-          data-video-type="youtube"
-          data-video-src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-          data-video-title="Tournée Abidjan 2024"
-        >
-          <div class="event-media">
-            <img
-              src="evenements/abidjan2024.jpg"
-              onerror="
-                this.src =
-                  'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'450\' viewBox=\'0 0 800 450\'%3E%3Crect fill=\'%230d160f\' width=\'800\' height=\'450\'/%3E%3Ctext fill=\'%23c0392b\' font-family=\'serif\' font-size=\'72\' x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\'%3EAbj%3C/text%3E%3C/svg%3E'
-              "
-              alt="Tournée Abidjan 2024"
-            />
-            <div class="event-media-overlay"></div>
-            <span class="event-year-badge">2024</span>
-            <button
-              class="event-play-btn"
-              onclick="openEventVideo(this.closest('.event-card'))"
-              aria-label="Voir la vidéo"
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <polygon points="5 3 19 12 5 21" />
-              </svg>
-            </button>
-          </div>
-          <div class="event-body">
-            <h3 class="event-name">Tournée Abidjan &amp; Lomé 2024</h3>
-            <div class="event-meta">
-              <span>
-                <svg
-                  width="11"
-                  height="11"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-                Côte d'Ivoire · Togo
-              </span>
-              <span>
-                <svg
-                  width="11"
-                  height="11"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <rect x="3" y="4" width="18" height="18" rx="2" />
-                  <line x1="16" y1="2" x2="16" y2="6" />
-                  <line x1="8" y1="2" x2="8" y2="6" />
-                  <line x1="3" y1="10" x2="21" y2="10" />
-                </svg>
-                Mars 2024
-              </span>
-            </div>
-            <p class="event-desc">
-              Première grande tournée internationale du label Azéto Gbèdé Music.
-              VANO BABY conquiert Abidjan puis Lomé avec ses nouveaux singles
-              <em>Russie</em>, <em>Hessi</em> et <em>Fitè</em>, prouvant que son
-              influence dépasse largement les frontières du Bénin.
-            </p>
-            <div class="event-tags">
-              <span class="event-tag">Tournée</span>
-              <span class="event-tag">International</span>
-              <span class="event-tag">2 pays</span>
+              <span class="event-tag">Awards</span
+              ><span class="event-tag">Meilleur Artiste</span
+              ><span class="event-tag">Cérémonie</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         CONTACT — Formulaire Formspree
-         ──────────────────────────────────────
-         COMMENT ÇA MARCHE :
-         Formspree est un service gratuit qui reçoit les soumissions
-         de formulaire et te les envoie par email, sans backend.
-
-         ÉTAPES POUR ACTIVER :
-         1. Va sur https://formspree.io et crée un compte gratuit
-         2. Clique "New Form" → donne-lui un nom (ex: "Contact Vano Baby")
-         3. Copie l'ID du formulaire (ex: xvgpkjrd)
-         4. Remplace "VOTRE_ID_FORMSPREE" dans l'attribut action ci-dessous
-            par ton vrai ID → action="https://formspree.io/f/xvgpkjrd"
-         5. Déploie le site — les messages arriveront dans ta boîte email !
-         Limite gratuite : 50 messages/mois
-    ══════════════════════════════════════ -->
     <section id="contact" style="position: relative">
       <div
         style="
@@ -2629,9 +2653,8 @@
             stroke-width="2"
           >
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-            <circle cx="12" cy="10" r="3" />
-          </svg>
-          <span>Cotonou, <strong>Bénin</strong></span>
+            <circle cx="12" cy="10" r="3" /></svg
+          ><span>Cotonou, <strong>Bénin</strong></span>
         </div>
         <div class="contact-detail">
           <svg
@@ -2643,11 +2666,9 @@
             stroke-width="2"
           >
             <rect x="2" y="3" width="20" height="14" rx="2" />
-            <polyline points="8 21 12 17 16 21" />
-          </svg>
-          <span>Label : <strong>Azéto Gbèdé Music</strong></span>
+            <polyline points="8 21 12 17 16 21" /></svg
+          ><span>Label : <strong>Azéto Gbèdé Music</strong></span>
         </div>
-        <!-- Explication Formspree -->
         <div class="formspree-notice">
           <p><strong>⚙️ Pour activer le formulaire :</strong></p>
           <ol class="formspree-steps">
@@ -2711,8 +2732,7 @@
           required
         ></textarea>
         <button type="submit" class="btn-send" id="submitBtn">
-          Envoyer la demande
-          <svg
+          Envoyer la demande<svg
             width="12"
             height="12"
             viewBox="0 0 24 24"
@@ -2741,16 +2761,13 @@
         <a
           href="https://www.facebook.com/people/VANO-BABY-Officiel/100044293546221/#"
           >Facebook</a
-        >
-        <a href="#">Spotify</a>
-        <a href="http://www.youtube.com/@VANOBABY">YouTube</a>
-        <a href="#">Deezer</a>
-        <a href="#">Apple Music</a>
+        ><a href="#">Spotify</a
+        ><a href="http://www.youtube.com/@VANOBABY">YouTube</a
+        ><a href="#">Deezer</a><a href="#">Apple Music</a>
       </div>
       <p class="footer-copy">© 2025 Azéto Gbèdé Music — Tous droits réservés</p>
     </footer>
 
-    <!-- ── PLAYER BAR ── -->
     <div id="player-bar">
       <div class="pb-info">
         <p class="pb-title" id="pbTitle">—</p>
@@ -2771,9 +2788,8 @@
                 stroke-width="2"
                 fill="none"
               />
-            </svg>
-          </button>
-          <button class="pb-btn main" id="playBtn" onclick="togglePlay()">
+            </svg></button
+          ><button class="pb-btn main" id="playBtn" onclick="togglePlay()">
             <svg
               id="playIcon"
               width="14"
@@ -2782,9 +2798,8 @@
               fill="currentColor"
             >
               <polygon points="5 3 19 12 5 21" />
-            </svg>
-          </button>
-          <button class="pb-btn" onclick="nextTrack()">
+            </svg></button
+          ><button class="pb-btn" onclick="nextTrack()">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <polygon points="5 4 15 12 5 20" />
               <line
@@ -2818,9 +2833,8 @@
           stroke-width="2"
         >
           <polygon points="11 5 6 9 2 9 2 15 6 15 11 19" />
-          <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-        </svg>
-        <input
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07" /></svg
+        ><input
           class="vol-input"
           id="volInput"
           type="range"
@@ -2832,7 +2846,6 @@
       </div>
     </div>
 
-    <!-- ── VIDEO MODAL ── -->
     <div class="modal-overlay" id="videoModal" onclick="closeModal(event)">
       <div class="modal-box" id="modalBox">
         <button class="modal-close" onclick="closeVideoModal()">
@@ -2857,180 +2870,98 @@
     </div>
 
     <script>
-      /* ══════════════════════════════════════════
-       1. SCROLL PROGRESS BAR
-    ══════════════════════════════════════════ */
-      const progressBar = document.getElementById("scroll-progress");
-      function updateProgress() {
-        const scrolled = window.scrollY;
-        const total =
-          document.documentElement.scrollHeight - window.innerHeight;
-        progressBar.style.width = (scrolled / total) * 100 + "%";
-      }
-
-      /* ══════════════════════════════════════════
-       2. NAV SHRINK ON SCROLL
-    ══════════════════════════════════════════ */
-      const mainNav = document.getElementById("mainNav");
-      function updateNav() {
-        mainNav.classList.toggle("scrolled", window.scrollY > 80);
-      }
-
-      /* ══════════════════════════════════════════
-       3. PARALLAX — Hero bg + decorative number
-    ══════════════════════════════════════════ */
-      const heroBg = document.getElementById("heroBg");
-      const heroNum = document.getElementById("heroNum");
-      function updateParallax() {
-        const y = window.scrollY;
-        if (heroBg) heroBg.style.transform = `translateY(${y * 0.35}px)`;
-        if (heroNum)
-          heroNum.style.transform = `translateY(calc(-65% + ${y * 0.2}px))`;
-      }
-
-      /* ══════════════════════════════════════════
-       4. FLOATING PARTICLES (hero section)
-    ══════════════════════════════════════════ */
-      (function spawnParticles() {
-        const container = document.getElementById("heroParticles");
-        if (!container) return;
-        const colors = ["var(--green-bright)", "var(--yellow)", "var(--green)"];
-        for (let i = 0; i < 18; i++) {
-          const p = document.createElement("div");
-          p.classList.add("particle");
-          const size = Math.random() * 4 + 2;
-          p.style.cssText = `
-          width:${size}px; height:${size}px;
-          left:${Math.random() * 100}%;
-          background:${colors[Math.floor(Math.random() * colors.length)]};
-          animation-duration:${8 + Math.random() * 12}s;
-          animation-delay:${Math.random() * 10}s;
-        `;
-          container.appendChild(p);
+      class ImageCarousel {
+        constructor(images) {
+          this.images = images;
+          this.currentIndex = 0;
+          this.interval = null;
+          this.autoPlayDelay = 4000;
+          this.init();
         }
-      })();
-
-      /* ══════════════════════════════════════════
-       5. SCROLL-TRIGGERED COUNTER ANIMATION
-    ══════════════════════════════════════════ */
-      function animateCounter(el) {
-        const target = parseFloat(el.dataset.target);
-        const suffix = el.dataset.suffix || "";
-        if (isNaN(target)) return;
-        let start = 0;
-        const duration = 1400;
-        const step = (timestamp) => {
-          if (!start) start = timestamp;
-          const progress = Math.min((timestamp - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3); // ease-out-cubic
-          el.textContent = Math.floor(eased * target) + suffix;
-          if (progress < 1) requestAnimationFrame(step);
-          else el.textContent = target + suffix;
-        };
-        requestAnimationFrame(step);
+        init() {
+          this.container = document.getElementById("portraitCarousel");
+          if (!this.container) return;
+          this.container.classList.add("portrait-inner");
+          this.imgElements = Array.from(
+            this.container.querySelectorAll(".carousel-img"),
+          );
+          if (this.imgElements.length === 0) return;
+          this.imgElements.forEach((img, idx) => {
+            if (idx === 0) img.classList.add("active");
+            else img.classList.remove("active");
+          });
+          const prevBtn = document.getElementById("carouselPrev");
+          const nextBtn = document.getElementById("carouselNext");
+          if (prevBtn) prevBtn.addEventListener("click", () => this.prev());
+          if (nextBtn) nextBtn.addEventListener("click", () => this.next());
+          this.createDots();
+          this.startAutoPlay();
+          this.container.addEventListener("mouseenter", () =>
+            this.stopAutoPlay(),
+          );
+          this.container.addEventListener("mouseleave", () =>
+            this.startAutoPlay(),
+          );
+        }
+        createDots() {
+          const dotsContainer = document.getElementById("carouselDots");
+          if (!dotsContainer) return;
+          dotsContainer.innerHTML = "";
+          this.dots = [];
+          this.imgElements.forEach((_, idx) => {
+            const dot = document.createElement("div");
+            dot.classList.add("dot");
+            if (idx === this.currentIndex) dot.classList.add("active");
+            dot.addEventListener("click", () => this.goTo(idx));
+            dotsContainer.appendChild(dot);
+            this.dots.push(dot);
+          });
+        }
+        updateDots() {
+          if (!this.dots) return;
+          this.dots.forEach((dot, idx) => {
+            if (idx === this.currentIndex) dot.classList.add("active");
+            else dot.classList.remove("active");
+          });
+        }
+        showImage(index) {
+          if (index < 0) index = this.imgElements.length - 1;
+          if (index >= this.imgElements.length) index = 0;
+          this.imgElements[this.currentIndex].classList.remove("active");
+          this.currentIndex = index;
+          this.imgElements[this.currentIndex].classList.add("active");
+          this.updateDots();
+        }
+        next() {
+          this.showImage(this.currentIndex + 1);
+          this.resetAutoPlay();
+        }
+        prev() {
+          this.showImage(this.currentIndex - 1);
+          this.resetAutoPlay();
+        }
+        goTo(index) {
+          this.showImage(index);
+          this.resetAutoPlay();
+        }
+        startAutoPlay() {
+          if (this.interval) clearInterval(this.interval);
+          this.interval = setInterval(() => this.next(), this.autoPlayDelay);
+        }
+        stopAutoPlay() {
+          if (this.interval) {
+            clearInterval(this.interval);
+            this.interval = null;
+          }
+        }
+        resetAutoPlay() {
+          this.stopAutoPlay();
+          this.startAutoPlay();
+        }
       }
 
-      /* ══════════════════════════════════════════
-       6. UNIVERSAL INTERSECTION OBSERVER
-    ══════════════════════════════════════════ */
-      const revealObs = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (!e.isIntersecting) return;
-            e.target.classList.add("visible");
-            // Counter
-            e.target.querySelectorAll("[data-target]").forEach(animateCounter);
-            revealObs.unobserve(e.target);
-          });
-        },
-        { threshold: 0.12 },
-      );
-
-      document
-        .querySelectorAll(
-          ".reveal, .reveal-left, .reveal-right, .reveal-scale, .tl-item, .award-card, .event-card",
-        )
-        .forEach((el) => revealObs.observe(el));
-
-      /* ══════════════════════════════════════════
-       7. STAGGER DELAYS on grids
-    ══════════════════════════════════════════ */
-      document.querySelectorAll(".awards-grid .award-card").forEach((c, i) => {
-        c.style.transitionDelay = i * 0.08 + "s";
-      });
-
-      /* ══════════════════════════════════════════
-       8. SECTION HORIZONTAL LINE DRAW on scroll
-    ══════════════════════════════════════════ */
-      // Handled via CSS reveal system
-
-      /* ══════════════════════════════════════════
-       9. SCROLL EVENT (combined)
-    ══════════════════════════════════════════ */
-      window.addEventListener(
-        "scroll",
-        () => {
-          updateProgress();
-          updateNav();
-          updateParallax();
-        },
-        { passive: true },
-      );
-
-      /* ══════════════════════════════════════════
-       10. CUSTOM CURSOR
-    ══════════════════════════════════════════ */
-      const cur = document.getElementById("cursor");
-      const ring = document.getElementById("cursorRing");
-      if (cur && ring) {
-        let rx = 0,
-          ry = 0;
-        document.addEventListener("mousemove", (e) => {
-          cur.style.left = e.clientX + "px";
-          cur.style.top = e.clientY + "px";
-          rx = e.clientX;
-          ry = e.clientY;
-        });
-        (function animRing() {
-          ring.style.left = rx + "px";
-          ring.style.top = ry + "px";
-          requestAnimationFrame(animRing);
-        })();
-        // Cursor hover state
-        document
-          .querySelectorAll("a, button, .track-row, .event-card, .award-card")
-          .forEach((el) => {
-            el.addEventListener("mouseenter", () => {
-              cur.classList.add("hover");
-              ring.classList.add("hover");
-            });
-            el.addEventListener("mouseleave", () => {
-              cur.classList.remove("hover");
-              ring.classList.remove("hover");
-            });
-          });
-      }
-
-      /* ══════════════════════════════════════════
-       11. HAMBURGER
-    ══════════════════════════════════════════ */
-      const hamburger = document.getElementById("hamburger");
-      const navMobile = document.getElementById("navMobile");
-      hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("open");
-        navMobile.classList.toggle("open");
-      });
-      document.querySelectorAll(".mobile-link").forEach((link) => {
-        link.addEventListener("click", () => {
-          hamburger.classList.remove("open");
-          navMobile.classList.remove("open");
-        });
-      });
-
-      /* ══════════════════════════════════════════
-       12. TRACKS DATA
-    ══════════════════════════════════════════ */
-      const tracks = [
+      // TRACKS DATA
+      const audioTracks = [
         {
           title: "Bô_Ébi",
           feat: "",
@@ -3038,8 +2969,6 @@
           year: "2023",
           dur: "3:41",
           audioSrc: "sons/Bô_Ébi.mp3",
-          videoSrc: "https://www.youtube.com/embed/QbstAWxoU24",
-          videoType: "youtube",
         },
         {
           title: "Do Bandi Min",
@@ -3048,8 +2977,6 @@
           year: "2023",
           dur: "3:07",
           audioSrc: "sons/Do_BANDI_Min.mp3",
-          videoSrc: "https://www.youtube.com/embed/ppiPCJrTO2I",
-          videoType: "youtube",
         },
         {
           title: "Amour Compliqué",
@@ -3058,8 +2985,6 @@
           year: "2025",
           dur: "2:56",
           audioSrc: "sons/Amour_Compliqué.mp3",
-          videoSrc: "https://www.youtube.com/embed/wzkEHPXHdt4",
-          videoType: "youtube",
         },
         {
           title: "COTE",
@@ -3068,8 +2993,6 @@
           year: "2024",
           dur: "3:22",
           audioSrc: "sons/COTE.mp3",
-          videoSrc: "https://www.youtube.com/embed/J4urwW0_-t0",
-          videoType: "youtube",
         },
         {
           title: "LA SOURIS DANSE",
@@ -3078,10 +3001,7 @@
           year: "2024",
           dur: "4:03",
           audioSrc: "sons/LA_SOURIS_DANSE.mp3",
-          videoSrc: "https://www.youtube.com/embed/ZKVq-0eb1FI",
-          videoType: "youtube",
         },
-        // --- Extra tracks (hidden by default) ---
         {
           title: "Assidogbea",
           feat: "feat. Le Renoi",
@@ -3089,8 +3009,6 @@
           year: "2024",
           dur: "3:02",
           audioSrc: "sons/Assidogbea.mp3",
-          videoSrc: "https://www.youtube.com/embed/VLzfpG2uw6Y",
-          videoType: "youtube",
         },
         {
           title: "Russie",
@@ -3099,8 +3017,6 @@
           year: "2024",
           dur: "2:50",
           audioSrc: "sons/Russie.mp3",
-          videoSrc: "https://www.youtube.com/embed/8dfMBHVV9HA",
-          videoType: "youtube",
         },
         {
           title: "Hessi",
@@ -3109,18 +3025,6 @@
           year: "2024",
           dur: "3:23",
           audioSrc: "sons/Hessi.mp3",
-          videoSrc: "https://www.youtube.com/embed/DVHpCJIixWs",
-          videoType: "youtube",
-        },
-        {
-          title: "Zando",
-          feat: "feat. X-TIME",
-          genre: "Afrobeat",
-          year: "2024",
-          dur: "3:15",
-          audioSrc: "sons/Zando.mp3",
-          videoSrc: "https://www.youtube.com/embed/OsGCyhpsDBQ",
-          videoType: "youtube",
         },
         {
           title: "Fitè",
@@ -3129,8 +3033,6 @@
           year: "2024",
           dur: "3:21",
           audioSrc: "sons/fite.mp3",
-          videoSrc: "https://www.youtube.com/embed/lcmT2sUppFA",
-          videoType: "youtube",
         },
         {
           title: "Story",
@@ -3139,8 +3041,6 @@
           year: "2024",
           dur: "2:40",
           audioSrc: "sons/Story.mp3",
-          videoSrc: "https://www.youtube.com/embed/eZYaF_7AcYE",
-          videoType: "youtube",
         },
         {
           title: "C'est Toi",
@@ -3149,8 +3049,6 @@
           year: "2023",
           dur: "3:19",
           audioSrc: "sons/C_Est_Toi.mp3",
-          videoSrc: "https://www.youtube.com/embed/FIO_LoEDW8g",
-          videoType: "youtube",
         },
         {
           title: "Weekend MOOD",
@@ -3159,8 +3057,6 @@
           year: "2023",
           dur: "3:25",
           audioSrc: "sons/Week_end.mp3",
-          videoSrc: "https://www.youtube.com/embed/Y5BzevHKj70",
-          videoType: "youtube",
         },
         {
           title: "MAHU-SI",
@@ -3169,8 +3065,6 @@
           year: "2023",
           dur: "3:21",
           audioSrc: "sons/MAHU_-SI.mp3",
-          videoSrc: "https://www.youtube.com/embed/hiVRXZP0HwU",
-          videoType: "youtube",
         },
         {
           title: "Coup Monté",
@@ -3179,8 +3073,6 @@
           year: "2023",
           dur: "3:30",
           audioSrc: "sons/Coup_Monte.mp3",
-          videoSrc: "https://www.youtube.com/embed/gydrSdjIpOc",
-          videoType: "youtube",
         },
         {
           title: "Griga",
@@ -3189,8 +3081,6 @@
           year: "2023",
           dur: "3:02",
           audioSrc: "sons/Griga.mp3",
-          videoSrc: "https://www.youtube.com/embed/603L-QVdC7w",
-          videoType: "youtube",
         },
         {
           title: "Enfant de Dieu",
@@ -3199,18 +3089,6 @@
           year: "2022",
           dur: "3:09",
           audioSrc: "sons/ENFANT_DE_DIEU.mp3",
-          videoSrc: "https://www.youtube.com/embed/DfzVN2aAfg0",
-          videoType: "youtube",
-        },
-        {
-          title: "Gang",
-          feat: "",
-          genre: "Afrobeat",
-          year: "2023",
-          dur: "3:18",
-          audioSrc: "sons/Gang.mp3",
-          videoSrc: "https://www.youtube.com/embed/Xp0RmjYOPsM",
-          videoType: "youtube",
         },
         {
           title: "DIYO",
@@ -3219,8 +3097,6 @@
           year: "2023",
           dur: "4:18",
           audioSrc: "sons/DIYO.mp3",
-          videoSrc: "https://www.youtube.com/embed/KXmn-LWazy8",
-          videoType: "youtube",
         },
         {
           title: "Tu mérites tout",
@@ -3229,8 +3105,6 @@
           year: "2021",
           dur: "3:54",
           audioSrc: "sons/Tu_Merites_Tout.mp3",
-          videoSrc: "https://www.youtube.com/embed/L6B4MsYQ8Fk",
-          videoType: "youtube",
         },
         {
           title: "Nou Towe le",
@@ -3239,48 +3113,6 @@
           year: "2021",
           dur: "3:46",
           audioSrc: "sons/Nou_Towe_le.mp3",
-          videoSrc: "https://www.youtube.com/embed/Q2TIZXhcbnc",
-          videoType: "youtube",
-        },
-        {
-          title: "A_ka_toun_Mahou_a",
-          feat: "QDOT",
-          genre: "Afrobeat",
-          year: "2021",
-          dur: "3:17",
-          audioSrc: "sons/A_ka_toun_Mahou_a.mp3",
-          videoSrc: "https://www.youtube.com/embed/X3bnebQ8lO4",
-          videoType: "youtube",
-        },
-        {
-          title: "Chérie Coco",
-          feat: "",
-          genre: "Afrobeat",
-          year: "2021",
-          dur: "3:28",
-          audioSrc: "sons/Chérie_Coco.mp3",
-          videoSrc: "https://www.youtube.com/embed/_YjflmrNHmI",
-          videoType: "youtube",
-        },
-        {
-          title: "Mikpo",
-          feat: "DJ KRISPEE",
-          genre: "Afrobeat",
-          year: "2020",
-          dur: "3:12",
-          audioSrc: "sons/Mawu_Mawu.mp3",
-          videoSrc: "https://www.youtube.com/embed/BkRZcz-H8iQ",
-          videoType: "youtube",
-        },
-        {
-          title: "Pas d'amis",
-          feat: "feat. Fanicko",
-          genre: "Afrobeat",
-          year: "2020",
-          dur: "3:12",
-          audioSrc: "sons/Pas_d_Amis.mp3",
-          videoSrc: "https://www.youtube.com/embed/h3KoetJR5Rg",
-          videoType: "youtube",
         },
         {
           title: "Bella",
@@ -3289,28 +3121,6 @@
           year: "2019",
           dur: "3:16",
           audioSrc: "sons/Bella.mp3",
-          videoSrc: "https://www.youtube.com/embed/HCSr8UR3y94",
-          videoType: "youtube",
-        },
-        {
-          title: "Bissé",
-          feat: "Suspect 95",
-          genre: "Afrobeat",
-          year: "2019",
-          dur: "3:16",
-          audioSrc: "sons/Bissé.mp3",
-          videoSrc: "https://www.youtube.com/embed/jqEKsqN-W3s",
-          videoType: "youtube",
-        },
-        {
-          title: "Hé Ko Lè Kou",
-          feat: "",
-          genre: "Afrobeat",
-          year: "2020",
-          dur: "3:12",
-          audioSrc: "sons/Hé_Ko_Lè_Kou.mp3",
-          videoSrc: "https://www.youtube.com/embed/LRAQ4YCMH1Q",
-          videoType: "youtube",
         },
         {
           title: "Madame",
@@ -3319,8 +3129,6 @@
           year: "2019",
           dur: "3:55",
           audioSrc: "sons/Madame.mp3",
-          videoSrc: "https://www.youtube.com/embed/-pXxmqxEYsk",
-          videoType: "youtube",
         },
         {
           title: "Je s'en fou",
@@ -3329,8 +3137,6 @@
           year: "2017",
           dur: "3:08",
           audioSrc: "sons/Je_Sen_Fou.mp3",
-          videoSrc: "https://www.youtube.com/embed/XUgJt2n_gZ8",
-          videoType: "youtube",
         },
         {
           title: "Tonsinmin Chap",
@@ -3339,8 +3145,6 @@
           year: "2017",
           dur: "3:15",
           audioSrc: "sons/Tonsinmin_Chap.mp3",
-          videoSrc: "https://www.youtube.com/embed/_t6Zr4G6uGI",
-          videoType: "youtube",
         },
         {
           title: "VANO WE",
@@ -3349,38 +3153,6 @@
           year: "2019",
           dur: "3:50",
           audioSrc: "sons/VANO_WE.mp3",
-          videoSrc: "https://www.youtube.com/embed/YTE-vZWsghc",
-          videoType: "youtube",
-        },
-        {
-          title: "AZANNAI",
-          feat: "",
-          genre: "Afrobeat",
-          year: "2018",
-          dur: "3:28",
-          audioSrc: "sons/AZANNAI.mp3",
-          videoSrc: "https://www.youtube.com/embed/UQ6ty_4BUvQ",
-          videoType: "youtube",
-        },
-        {
-          title: "Tchiogba",
-          feat: "",
-          genre: "Afrobeat",
-          year: "2018",
-          dur: "3:12",
-          audioSrc: "sons/Tchiogba.mp3",
-          videoSrc: "https://www.youtube.com/embed/Huz5XT9Brx4",
-          videoType: "youtube",
-        },
-        {
-          title: "Stp SIDA",
-          feat: "",
-          genre: "Afrobeat",
-          year: "2020",
-          dur: "3:12",
-          audioSrc: "sons/Stop_SIDA.mp3",
-          videoSrc: "https://www.youtube.com/embed/EQFH5c0erpE",
-          videoType: "youtube",
         },
         {
           title: "Man Zewe Do Charge",
@@ -3389,8 +3161,6 @@
           year: "2019",
           dur: "3:50",
           audioSrc: "sons/Man_Zewe_Do_Charge.mp3",
-          videoSrc: "https://www.youtube.com/embed/wQuPRbt5EyU",
-          videoType: "youtube",
         },
         {
           title: "Adigoue Gboun Gboun",
@@ -3399,8 +3169,6 @@
           year: "2016",
           dur: "3:39",
           audioSrc: "sons/Adigoue_Gboun_Blaaz.mp3",
-          videoSrc: "https://www.youtube.com/embed/-eqzyzD48y8",
-          videoType: "youtube",
         },
         {
           title: "Adigoue Gboun Gboun",
@@ -3409,8 +3177,6 @@
           year: "2016",
           dur: "3:24",
           audioSrc: "sons/Adigoue_Gboun.mp3",
-          videoSrc: "https://www.youtube.com/embed/W52vlJJoxyc",
-          videoType: "youtube",
         },
         {
           title: "Man Zinwe",
@@ -3419,8 +3185,6 @@
           year: "2023",
           dur: "3:15",
           audioSrc: "sons/Man_Zinwe.mp3",
-          videoSrc: "https://www.youtube.com/embed/",
-          videoType: "youtube",
         },
         {
           title: "Boyi",
@@ -3429,8 +3193,6 @@
           year: "2023",
           dur: "3:10",
           audioSrc: "sons/Boyi.mp3",
-          videoSrc: "https://www.youtube.com/embed/LFN1KV1b6NY",
-          videoType: "youtube",
         },
         {
           title: "Djomido",
@@ -3439,84 +3201,629 @@
           year: "2020",
           dur: "3:19",
           audioSrc: "sons/DJOMIDO.mp3",
-          videoSrc: "https://www.youtube.com/embed/VSa-XtxdurU",
-          videoType: "youtube",
         },
       ];
 
-      const TRACKS_VISIBLE = 5; // Nombre de tracks affichées au départ
-      let voirPlusOpen = false;
+      const videoTracks = [
+        {
+          title: "Bô_Ébi",
+          feat: "",
+          year: "2023",
+          duration: "3:41",
+          videoSrc: "https://www.youtube.com/embed/QbstAWxoU24",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/QbstAWxoU24/maxresdefault.jpg",
+        },
+        {
+          title: "Do Bandi Min",
+          feat: "",
+          year: "2023",
+          dur: "3:07",
+          videoSrc: "https://www.youtube.com/embed/ppiPCJrTO2I",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/ppiPCJrTO2I/maxresdefault.jpg",
+        },
+        {
+          title: "Amour Compliqué",
+          feat: "feat. Lauraa",
+          year: "2025",
+          dur: "2:56",
+          videoSrc: "https://www.youtube.com/embed/wzkEHPXHdt4",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/wzkEHPXHdt4/maxresdefault.jpg",
+        },
+        {
+          title: "COTE",
+          feat: "feat. CONEX ET DON",
+          year: "2024",
+          dur: "3:22",
+          videoSrc: "https://www.youtube.com/embed/J4urwW0_-t0",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/J4urwW0_-t0/maxresdefault.jpg",
+        },
+        {
+          title: "LA SOURIS DANSE",
+          feat: "feat. Axel Merryl",
+          year: "2024",
+          dur: "4:03",
+          videoSrc: "https://www.youtube.com/embed/ZKVq-0eb1FI",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/ZKVq-0eb1FI/maxresdefault.jpg",
+        },
+        // --- Extra tracks (hidden by default) ---
+        {
+          title: "Assidogbea",
+          feat: "feat. Le Renoi",
+          year: "2024",
+          dur: "3:02",
+          videoSrc: "https://www.youtube.com/embed/VLzfpG2uw6Y",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/VLzfpG2uw6Y/maxresdefault.jpg",
+        },
+        {
+          title: "Russie",
+          feat: "feat. Himra",
+          year: "2024",
+          dur: "2:50",
+          videoSrc: "https://www.youtube.com/embed/8dfMBHVV9HA",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/8dfMBHVV9HA/maxresdefault.jpg",
+        },
+        {
+          title: "Hessi",
+          feat: "feat. MAYKEN",
+          year: "2024",
+          dur: "3:23",
+          videoSrc: "https://www.youtube.com/embed/DVHpCJIixWs",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/DVHpCJIixWs/maxresdefault.jpg",
+        },
+        {
+          title: "Zando",
+          feat: "feat. X-TIME",
+          year: "2024",
+          dur: "3:15",
+          videoSrc: "https://www.youtube.com/embed/OsGCyhpsDBQ",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/OsGCyhpsDBQ/maxresdefault.jpg",
+        },
+        {
+          title: "Fitè",
+          feat: "",
+          year: "2024",
+          dur: "3:21",
+          videoSrc: "https://www.youtube.com/embed/lcmT2sUppFA",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/lcmT2sUppFA/maxresdefault.jpg",
+        },
+        {
+          title: "Story",
+          feat: "",
+          year: "2024",
+          dur: "2:40",
+          videoSrc: "https://www.youtube.com/embed/eZYaF_7AcYE",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/eZYaF_7AcYE/maxresdefault.jpg",
+        },
+        {
+          title: "C'est Toi",
+          feat: "",
+          year: "2023",
+          dur: "3:19",
+          videoSrc: "https://www.youtube.com/embed/FIO_LoEDW8g",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/FIO_LoEDW8g/maxresdefault.jpg",
+        },
+        {
+          title: "Weekend MOOD",
+          feat: "",
+          year: "2023",
+          dur: "3:25",
+          videoSrc: "https://www.youtube.com/embed/Y5BzevHKj70",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/Y5BzevHKj70/maxresdefault.jpg",
+        },
+        {
+          title: "MAHU-SI",
+          feat: "",
+          year: "2023",
+          dur: "3:21",
+          videoSrc: "https://www.youtube.com/embed/hiVRXZP0HwU",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/hiVRXZP0HwU/maxresdefault.jpg",
+        },
+        {
+          title: "Coup Monté",
+          feat: "",
+          year: "2023",
+          dur: "3:30",
+          videoSrc: "https://www.youtube.com/embed/gydrSdjIpOc",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/gydrSdjIpOc/maxresdefault.jpg",
+        },
+        {
+          title: "Griga",
+          feat: "feat. Sahel La CIP",
+          year: "2023",
+          dur: "3:02",
+          videoSrc: "https://www.youtube.com/embed/603L-QVdC7w",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/603L-QVdC7w/maxresdefault.jpg",
+        },
+        {
+          title: "Enfant de Dieu",
+          feat: "",
+          year: "2022",
+          dur: "3:09",
+          videoSrc: "https://www.youtube.com/embed/DfzVN2aAfg0",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/DfzVN2aAfg0/maxresdefault.jpg",
+        },
+        {
+          title: "Gang",
+          feat: "",
+          year: "2023",
+          dur: "3:18",
+          videoSrc: "https://www.youtube.com/embed/Xp0RmjYOPsM",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/Xp0RmjYOPsM/maxresdefault.jpg",
+        },
+        {
+          title: "DIYO",
+          feat: "",
+          year: "2023",
+          dur: "4:18",
+          videoSrc: "https://www.youtube.com/embed/KXmn-LWazy8",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/KXmn-LWazy8/maxresdefault.jpg",
+        },
+        {
+          title: "Tu mérites tout",
+          feat: "",
+          year: "2021",
+          dur: "3:54",
+          videoSrc: "https://www.youtube.com/embed/L6B4MsYQ8Fk",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/L6B4MsYQ8Fk/maxresdefault.jpg",
+        },
+        {
+          title: "Nou Towe le",
+          feat: "",
+          year: "2021",
+          dur: "3:46",
+          videoSrc: "https://www.youtube.com/embed/Q2TIZXhcbnc",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/Q2TIZXhcbnc/maxresdefault.jpg",
+        },
+        {
+          title: "A_ka_toun_Mahou_a",
+          feat: "QDOT",
+          year: "2021",
+          dur: "3:17",
+          videoSrc: "https://www.youtube.com/embed/X3bnebQ8lO4",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/X3bnebQ8lO4/maxresdefault.jpg",
+        },
+        {
+          title: "Chérie Coco",
+          feat: "",
+          year: "2021",
+          dur: "3:28",
+          videoSrc: "https://www.youtube.com/embed/_YjflmrNHmI",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/_YjflmrNHmI/maxresdefault.jpg",
+        },
+        {
+          title: "Mikpo",
+          feat: "DJ KRISPEE",
+          year: "2020",
+          dur: "3:12",
+          videoSrc: "https://www.youtube.com/embed/BkRZcz-H8iQ",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/BkRZcz-H8iQ/maxresdefault.jpg",
+        },
+        {
+          title: "Pas d'amis",
+          genre: "Afrobeat",
+          year: "2020",
+          dur: "3:12",
+          videoSrc: "https://www.youtube.com/embed/h3KoetJR5Rg",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/h3KoetJR5Rg/maxresdefault.jpg",
+        },
+        {
+          title: "Bella",
+          feat: "",
+          year: "2019",
+          dur: "3:16",
+          videoSrc: "https://www.youtube.com/embed/HCSr8UR3y94",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/HCSr8UR3y94/maxresdefault.jpg",
+        },
+        {
+          title: "Bissé",
+          feat: "Suspect 95",
+          year: "2019",
+          dur: "3:16",
+          videoSrc: "https://www.youtube.com/embed/jqEKsqN-W3s",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/jqEKsqN-W3s/maxresdefault.jpg",
+        },
+        {
+          title: "Hé Ko Lè Kou",
+          feat: "",
+          year: "2020",
+          dur: "3:12",
+          videoSrc: "https://www.youtube.com/embed/LRAQ4YCMH1Q",
+          videoType: "youtube",
+        },
+        {
+          title: "Madame",
+          feat: "",
+          year: "2019",
+          dur: "3:55",
+          videoSrc: "https://www.youtube.com/embed/-pXxmqxEYsk",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/-pXxmqxEYsk/maxresdefault.jpg",
+        },
+        {
+          title: "Je s'en fou",
+          feat: "",
+          year: "2017",
+          dur: "3:08",
+          videoSrc: "https://www.youtube.com/embed/XUgJt2n_gZ8",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/XUgJt2n_gZ8/maxresdefault.jpg",
+        },
+        {
+          title: "Tonsinmin Chap",
+          feat: "feat. NG Bling",
+          year: "2017",
+          dur: "3:15",
+          videoSrc: "https://www.youtube.com/embed/_t6Zr4G6uGI",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/_t6Zr4G6uGI/maxresdefault.jpg",
+        },
+        {
+          title: "VANO WE",
+          feat: "",
+          year: "2019",
+          dur: "3:50",
+          videoSrc: "https://www.youtube.com/embed/YTE-vZWsghc",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/YTE-vZWsghc/maxresdefault.jpg",
+        },
+        {
+          title: "AZANNAI",
+          feat: "",
+          year: "2018",
+          dur: "3:28",
+          videoSrc: "https://www.youtube.com/embed/UQ6ty_4BUvQ",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/UQ6ty_4BUvQ/maxresdefault.jpg",
+        },
+        {
+          title: "Tchiogba",
+          feat: "",
+          year: "2018",
+          dur: "3:12",
+          videoSrc: "https://www.youtube.com/embed/Huz5XT9Brx4",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/Huz5XT9Brx4/maxresdefault.jpg",
+        },
+        {
+          title: "Stp SIDA",
+          feat: "",
+          year: "2020",
+          dur: "3:12",
+          videoSrc: "https://www.youtube.com/embed/EQFH5c0erpE",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/EQFH5c0erpE/maxresdefault.jpg",
+        },
+        {
+          title: "Man Zewe Do Charge",
+          feat: "",
+          year: "2019",
+          dur: "3:50",
+          videoSrc: "https://www.youtube.com/embed/wQuPRbt5EyU",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/wQuPRbt5EyU/maxresdefault.jpg",
+        },
+        {
+          title: "Adigoue Gboun Gboun",
+          feat: "feat. Blaaz",
+          year: "2016",
+          dur: "3:39",
+          videoSrc: "https://www.youtube.com/embed/-eqzyzD48y8",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/-eqzyzD48y8/maxresdefault.jpg",
+        },
+        {
+          title: "Adigoue Gboun Gboun",
+          feat: "",
+          year: "2016",
+          dur: "3:24",
+          videoSrc: "https://www.youtube.com/embed/W52vlJJoxyc",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/W52vlJJoxyc/maxresdefault.jpg",
+        },
+        {
+          title: "Boyi",
+          feat: "feat. Chaarlity",
+          year: "2023",
+          dur: "3:10",
+          videoSrc: "https://www.youtube.com/embed/LFN1KV1b6NY",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/LFN1KV1b6NY/maxresdefault.jpg",
+        },
+        {
+          title: "Djomido",
+          feat: "100ROYAL",
+          year: "2020",
+          dur: "3:19",
+          videoSrc: "https://www.youtube.com/embed/VSa-XtxdurU",
+          videoType: "youtube",
+          thumbnail: "https://img.youtube.com/vi/VSa-XtxdurU/maxresdefault.jpg",
+        },
+      ];
 
-      /* ══════════════════════════════════════════
-       13. RENDER TRACKS
-    ══════════════════════════════════════════ */
-      function buildRow(t, i) {
-        const videoBadge = t.videoSrc
-          ? `<span class="track-video-badge">🎬 Clip</span>`
-          : "";
-        return `
-        <tr class="track-row" id="tr${i}" onclick="onTrackClick(${i},event)">
-          <td><span class="track-num" id="tn${i}">${String(i + 1).padStart(2, "0")}</span></td>
-          <td>
-            <span class="track-name">${t.title}</span>
-            ${t.feat ? `<span class="track-feat">${t.feat}</span>` : ""}
-            ${videoBadge}
-          </td>
-          <td class="hide-mobile"><span class="track-genre-pill">${t.genre}</span></td>
-          <td class="hide-mobile"><span class="track-dur">${t.year}</span></td>
-          <td><span class="track-dur">${t.dur}</span></td>
-        </tr>`;
+      const AUDIO_VISIBLE = 5;
+      let audioVoirPlusOpen = false;
+      let allVideosShown = false;
+
+      function buildAudioRow(t, i) {
+        return `<tr class="track-row" id="audioTr${i}" onclick="onAudioTrackClick(${i})"><td><span class="track-num" id="audioTn${i}">${String(i + 1).padStart(2, "0")}</span></td><td><span class="track-name">${t.title}</span>${t.feat ? `<span class="track-feat">${t.feat}</span>` : ""}</td><td class="hide-mobile"><span class="track-genre-pill">${t.genre}</span></td><td class="hide-mobile"><span class="track-dur">${t.year}</span></td><td><span class="track-dur">${t.dur}</span></td></tr>`;
       }
-
-      function renderTracks() {
-        const main = document.getElementById("tracksTbody");
-        const extra = document.getElementById("tracksExtra");
-        main.innerHTML = tracks
-          .slice(0, TRACKS_VISIBLE)
-          .map((t, i) => buildRow(t, i))
+      function renderAudioTracks() {
+        const main = document.getElementById("audioTracksTbody");
+        const extra = document.getElementById("audioTracksExtra");
+        if (!main) return;
+        main.innerHTML = audioTracks
+          .slice(0, AUDIO_VISIBLE)
+          .map((t, i) => buildAudioRow(t, i))
           .join("");
-        extra.innerHTML = tracks
-          .slice(TRACKS_VISIBLE)
-          .map((t, i) => buildRow(t, i + TRACKS_VISIBLE))
+        extra.innerHTML = audioTracks
+          .slice(AUDIO_VISIBLE)
+          .map((t, i) => buildAudioRow(t, i + AUDIO_VISIBLE))
           .join("");
       }
-
-      function toggleVoirPlus() {
-        const extra = document.getElementById("tracksExtra");
-        const btn = document.getElementById("voirPlusBtn");
-        const label = document.getElementById("voirPlusLabel");
-        voirPlusOpen = !voirPlusOpen;
-        extra.classList.toggle("open", voirPlusOpen);
-        btn.classList.toggle("expanded", voirPlusOpen);
-        label.textContent = voirPlusOpen ? "Réduire" : "Voir plus de sons";
+      function toggleAudioVoirPlus() {
+        const extra = document.getElementById("audioTracksExtra");
+        const btn = document.getElementById("audioVoirPlusBtn");
+        const label = document.getElementById("audioVoirPlusLabel");
+        audioVoirPlusOpen = !audioVoirPlusOpen;
+        extra.classList.toggle("open", audioVoirPlusOpen);
+        btn.classList.toggle("expanded", audioVoirPlusOpen);
+        label.textContent = audioVoirPlusOpen
+          ? "Réduire"
+          : "Voir plus de morceaux";
       }
-
-      /* ══════════════════════════════════════════
-       14. VIDEO MODAL
-    ══════════════════════════════════════════ */
-      function openTrackVideo(track) {
-        if (!track.videoSrc) return false;
+      function renderVideoTracks() {
+        const container = document.getElementById("videosGrid");
+        const voirPlusWrap = document.getElementById("videoVoirPlusWrap");
+        if (!container) return;
+        const videosToShow = allVideosShown
+          ? videoTracks
+          : videoTracks.slice(0, 6);
+        container.innerHTML = videosToShow
+          .map(
+            (video, idx) =>
+              `<div class="video-card" onclick="openVideoModal(${idx})"><div class="video-thumbnail"><img src="${video.thumbnail}" alt="${video.title}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'480\' height=\'360\' viewBox=\'0 0 480 360\'%3E%3Crect fill=\'%231a7a4a\' width=\'480\' height=\'360\'/%3E%3Ctext fill=\'%23f5c518\' font-family=\'serif\' font-size=\'40\' x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\'%3E${video.title}%3C/text%3E%3C/svg%3E'"><div class="video-play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21"/></svg></div></div><div class="video-info"><h4 class="video-title">${video.title}</h4>${video.feat ? `<p class="video-feat">${video.feat}</p>` : ""}<div class="video-meta"><span>${video.year}</span><span class="video-duration"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${video.duration}</span></div></div></div>`,
+          )
+          .join("");
+        if (voirPlusWrap)
+          voirPlusWrap.style.display =
+            videoTracks.length > 6 ? "block" : "none";
+      }
+      function toggleVideoVoirPlus() {
+        allVideosShown = !allVideosShown;
+        const label = document.getElementById("videoVoirPlusLabel");
+        const btn = document.getElementById("videoVoirPlusBtn");
+        label.textContent = allVideosShown
+          ? "Voir moins"
+          : "Voir plus de vidéos";
+        if (btn) btn.classList.toggle("expanded", allVideosShown);
+        renderVideoTracks();
+      }
+      function openVideoModal(index) {
+        const video = videoTracks[index];
+        if (!video || !video.videoSrc) return;
         const modal = document.getElementById("videoModal");
         const wrap = document.getElementById("modalVideoWrap");
         const title = document.getElementById("modalTitle");
         wrap.innerHTML = "";
-        title.textContent = track.title + (track.feat ? " " + track.feat : "");
-        if (track.videoType === "youtube") {
+        title.textContent = video.title + (video.feat ? " " + video.feat : "");
+        if (video.videoType === "youtube") {
           const iframe = document.createElement("iframe");
-          iframe.src = track.videoSrc + "?autoplay=1";
+          iframe.src = video.videoSrc + "?autoplay=1";
           iframe.allow =
             "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
           iframe.allowFullscreen = true;
           wrap.appendChild(iframe);
         } else {
-          const video = document.createElement("video");
-          video.src = track.videoSrc;
-          video.controls = true;
-          video.autoplay = true;
-          wrap.appendChild(video);
+          const videoEl = document.createElement("video");
+          videoEl.src = video.videoSrc;
+          videoEl.controls = true;
+          videoEl.autoplay = true;
+          wrap.appendChild(videoEl);
         }
         modal.classList.add("open");
-        return true;
+      }
+      function initSonsTabs() {
+        const tabs = document.querySelectorAll(".son-tab");
+        const contents = document.querySelectorAll(".son-tab-content");
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", () => {
+            const tabId = tab.dataset.tab;
+            tabs.forEach((t) => t.classList.remove("active"));
+            contents.forEach((c) => c.classList.remove("active"));
+            tab.classList.add("active");
+            document.getElementById(`${tabId}-tab`).classList.add("active");
+          });
+        });
+      }
+
+      let audioEl = new Audio();
+      let currentAudioIndex = null;
+      let playing = false;
+      let elapsed = 0;
+      let duration = 0;
+      let simTimer = null;
+      let usingReal = false;
+
+      function parseDur(s) {
+        const [m, sec] = s.split(":").map(Number);
+        return m * 60 + sec;
+      }
+      function fmt(s) {
+        const m = Math.floor(s / 60),
+          sec = Math.floor(s % 60);
+        return `${m}:${sec.toString().padStart(2, "0")}`;
+      }
+      function onAudioTrackClick(idx) {
+        playAudioTrack(idx);
+      }
+      function playAudioTrack(idx) {
+        audioEl.pause();
+        stopSimulation();
+        elapsed = 0;
+        setAudioTrackUI(idx);
+        const t = audioTracks[idx];
+        if (t.audioSrc) startRealAudio(t.audioSrc);
+        else startSimulation();
+      }
+      function setAudioTrackUI(idx) {
+        if (currentAudioIndex !== null) {
+          const prevRow = document.getElementById(
+            "audioTr" + currentAudioIndex,
+          );
+          if (prevRow) prevRow.classList.remove("playing");
+          const prevTn = document.getElementById("audioTn" + currentAudioIndex);
+          if (prevTn)
+            prevTn.innerHTML = String(currentAudioIndex + 1).padStart(2, "0");
+        }
+        currentAudioIndex = idx;
+        const t = audioTracks[idx];
+        const currentRow = document.getElementById("audioTr" + idx);
+        if (currentRow) currentRow.classList.add("playing");
+        const currentTn = document.getElementById("audioTn" + idx);
+        if (currentTn)
+          currentTn.innerHTML = `<div class="mini-bars"><span></span><span></span><span></span></div>`;
+        document.getElementById("pbTitle").textContent =
+          t.title + (t.feat ? " " + t.feat : "");
+        document.getElementById("player-bar").classList.add("active");
+        document.getElementById("tElapsed").textContent = "0:00";
+        document.getElementById("pbFill").style.width = "0%";
+      }
+      function startRealAudio(src) {
+        stopSimulation();
+        audioEl.src = src;
+        audioEl.load();
+        audioEl.play().catch(() => startSimulation());
+        usingReal = true;
+        playing = true;
+        updateBadge();
+        updateIcon();
+        audioEl.ontimeupdate = () => {
+          if (audioEl.duration) {
+            elapsed = audioEl.currentTime;
+            duration = audioEl.duration;
+            document.getElementById("pbFill").style.width =
+              (elapsed / duration) * 100 + "%";
+            document.getElementById("tElapsed").textContent = fmt(elapsed);
+            document.getElementById("tDuration").textContent = fmt(duration);
+          }
+        };
+        audioEl.onended = nextTrack;
+        audioEl.onloadedmetadata = () => {
+          duration = audioEl.duration;
+          document.getElementById("tDuration").textContent = fmt(duration);
+        };
+      }
+      function startSimulation() {
+        usingReal = false;
+        playing = true;
+        updateBadge();
+        updateIcon();
+        stopSimulation();
+        const t = audioTracks[currentAudioIndex];
+        duration = parseDur(t.dur);
+        document.getElementById("tDuration").textContent = t.dur;
+        simTimer = setInterval(() => {
+          if (elapsed < duration) {
+            elapsed += 0.1;
+            document.getElementById("pbFill").style.width =
+              (elapsed / duration) * 100 + "%";
+            document.getElementById("tElapsed").textContent = fmt(elapsed);
+          } else nextTrack();
+        }, 100);
+      }
+      function stopSimulation() {
+        clearInterval(simTimer);
+        simTimer = null;
+      }
+      function togglePlay() {
+        if (currentAudioIndex === null) {
+          playAudioTrack(0);
+          return;
+        }
+        if (playing) {
+          playing = false;
+          if (usingReal) audioEl.pause();
+          else stopSimulation();
+        } else {
+          playing = true;
+          if (usingReal)
+            audioEl.play().catch(() => {
+              usingReal = false;
+              startSimulation();
+            });
+          else startSimulation();
+        }
+        updateIcon();
+        updateBadge();
+      }
+      function prevTrack() {
+        if (currentAudioIndex === null) return;
+        if (elapsed < 3)
+          playAudioTrack(
+            (currentAudioIndex - 1 + audioTracks.length) % audioTracks.length,
+          );
+        else {
+          elapsed = 0;
+          if (usingReal) audioEl.currentTime = 0;
+          else {
+            stopSimulation();
+            if (playing) startSimulation();
+          }
+          document.getElementById("pbFill").style.width = "0%";
+          document.getElementById("tElapsed").textContent = "0:00";
+        }
+      }
+      function nextTrack() {
+        if (currentAudioIndex === null) return;
+        playAudioTrack((currentAudioIndex + 1) % audioTracks.length);
+      }
+      function seekTrack(e) {
+        const bar = document.getElementById("pbBar");
+        const ratio = e.offsetX / bar.offsetWidth;
+        elapsed = ratio * duration;
+        document.getElementById("pbFill").style.width = ratio * 100 + "%";
+        document.getElementById("tElapsed").textContent = fmt(elapsed);
+        if (usingReal) audioEl.currentTime = elapsed;
+      }
+      function setVolume(val) {
+        audioEl.volume = val / 100;
+      }
+      function updateIcon() {
+        document.getElementById("playIcon").innerHTML = playing
+          ? '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>'
+          : '<polygon points="5 3 19 12 5 21"/>';
+      }
+      function updateBadge() {
+        const badge = document.getElementById("pbBadge");
+        badge.textContent = usingReal ? "audio" : "simulation";
+        badge.className = "pb-audio-badge " + (usingReal ? "real" : "sim");
       }
 
       function openEventVideo(card) {
@@ -3544,7 +3851,6 @@
         }
         modal.classList.add("open");
       }
-
       function closeVideoModal() {
         document.getElementById("videoModal").classList.remove("open");
         document.getElementById("modalVideoWrap").innerHTML = "";
@@ -3557,231 +3863,177 @@
         if (e.key === "Escape") closeVideoModal();
       });
 
-      /* ══════════════════════════════════════════
-       15. CLICK ON TRACK → play audio OR open video
-    ══════════════════════════════════════════ */
-      function onTrackClick(idx) {
-        const t = tracks[idx];
-        // If track has a video, open modal (you can change this logic to always play audio)
-        if (t.videoSrc) {
-          openTrackVideo(t);
-          return;
+      const progressBar = document.getElementById("scroll-progress");
+      function updateProgress() {
+        const scrolled = window.scrollY;
+        const total =
+          document.documentElement.scrollHeight - window.innerHeight;
+        progressBar.style.width = (scrolled / total) * 100 + "%";
+      }
+      const mainNav = document.getElementById("mainNav");
+      function updateNav() {
+        mainNav.classList.toggle("scrolled", window.scrollY > 80);
+      }
+      const heroBg = document.getElementById("heroBg");
+      const heroNum = document.getElementById("heroNum");
+      function updateParallax() {
+        const y = window.scrollY;
+        if (heroBg) heroBg.style.transform = `translateY(${y * 0.35}px)`;
+        if (heroNum)
+          heroNum.style.transform = `translateY(calc(-65% + ${y * 0.2}px))`;
+      }
+      (function spawnParticles() {
+        const container = document.getElementById("heroParticles");
+        if (!container) return;
+        const colors = ["var(--green-bright)", "var(--yellow)", "var(--green)"];
+        for (let i = 0; i < 18; i++) {
+          const p = document.createElement("div");
+          p.classList.add("particle");
+          const size = Math.random() * 4 + 2;
+          p.style.cssText = `width:${size}px; height:${size}px; left:${Math.random() * 100}%; background:${colors[Math.floor(Math.random() * colors.length)]}; animation-duration:${8 + Math.random() * 12}s; animation-delay:${Math.random() * 10}s;`;
+          container.appendChild(p);
         }
-        playTrack(idx);
-      }
-
-      /* ══════════════════════════════════════════
-       16. AUDIO PLAYER
-    ══════════════════════════════════════════ */
-      let audioEl = new Audio();
-      let current = "https://www.youtube.com/embed/",
-        playing = false,
-        elapsed = 0,
-        duration = 0;
-      let simTimer = "https://www.youtube.com/embed/",
-        usingReal = false;
-      audioEl.volume = 0.8;
-
-      function parseDur(s) {
-        const [m, sec] = s.split(":").map(Number);
-        return m * 60 + sec;
-      }
-      function fmt(s) {
-        const m = Math.floor(s / 60),
-          sec = Math.floor(s % 60);
-        return `${m}:${sec.toString().padStart(2, "0")}`;
-      }
-
-      function setTrackUI(idx) {
-        if (current !== "https://www.youtube.com/embed/") {
-          document.getElementById("tr" + current)?.classList.remove("playing");
-          const tn = document.getElementById("tn" + current);
-          if (tn) tn.innerHTML = String(current + 1).padStart(2, "0");
-        }
-        current = idx;
-        const t = tracks[idx];
-        document.getElementById("tr" + idx).classList.add("playing");
-        document.getElementById("tn" + idx).innerHTML =
-          `<div class="mini-bars"><span></span><span></span><span></span></div>`;
-        document.getElementById("pbTitle").textContent =
-          t.title + (t.feat ? " " + t.feat : "");
-        document.getElementById("player-bar").classList.add("active");
-        document.getElementById("tElapsed").textContent = "0:00";
-        document.getElementById("pbFill").style.width = "0%";
-      }
-
-      function startRealAudio(src) {
-        stopSimulation();
-        audioEl.src = src;
-        audioEl.load();
-        audioEl.play().catch(() => startSimulation());
-        usingReal = true;
-        playing = true;
-        updateBadge();
-        updateIcon();
-        audioEl.ontimeupdate = () => {
-          if (audioEl.duration) {
-            elapsed = audioEl.currentTime;
-            duration = audioEl.duration;
-            document.getElementById("pbFill").style.width =
-              (elapsed / duration) * 100 + "%";
-            document.getElementById("tElapsed").textContent = fmt(elapsed);
-            document.getElementById("tDuration").textContent = fmt(duration);
-          }
+      })();
+      function animateCounter(el) {
+        const target = parseFloat(el.dataset.target);
+        const suffix = el.dataset.suffix || "";
+        if (isNaN(target)) return;
+        let start = 0;
+        const duration = 1400;
+        const step = (timestamp) => {
+          if (!start) start = timestamp;
+          const progress = Math.min((timestamp - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.floor(eased * target) + suffix;
+          if (progress < 1) requestAnimationFrame(step);
+          else el.textContent = target + suffix;
         };
-        audioEl.onended = nextTrack;
-        audioEl.onloadedmetadata = () => {
-          duration = audioEl.duration;
-          document.getElementById("tDuration").textContent = fmt(duration);
-        };
+        requestAnimationFrame(step);
       }
-
-      function startSimulation() {
-        usingReal = false;
-        playing = true;
-        updateBadge();
-        updateIcon();
-        stopSimulation();
-        const t = tracks[current];
-        duration = parseDur(t.dur);
-        document.getElementById("tDuration").textContent = t.dur;
-        simTimer = setInterval(() => {
-          if (elapsed < duration) {
-            elapsed += 0.1;
-            document.getElementById("pbFill").style.width =
-              (elapsed / duration) * 100 + "%";
-            document.getElementById("tElapsed").textContent = fmt(elapsed);
-          } else nextTrack();
-        }, 100);
-      }
-
-      function stopSimulation() {
-        clearInterval(simTimer);
-        simTimer = "https://www.youtube.com/embed/";
-      }
-
-      function playTrack(idx) {
-        audioEl.pause();
-        stopSimulation();
-        elapsed = 0;
-        setTrackUI(idx);
-        const t = tracks[idx];
-        if (t.audioSrc) startRealAudio(t.audioSrc);
-        else startSimulation();
-      }
-
-      function togglePlay() {
-        if (current === "https://www.youtube.com/embed/") {
-          playTrack(0);
-          return;
-        }
-        if (playing) {
-          playing = false;
-          if (usingReal) audioEl.pause();
-          else stopSimulation();
-        } else {
-          playing = true;
-          if (usingReal)
-            audioEl.play().catch(() => {
-              usingReal = false;
-              startSimulation();
+      const revealObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            e.target.classList.add("visible");
+            e.target.querySelectorAll("[data-target]").forEach(animateCounter);
+            revealObs.unobserve(e.target);
+          });
+        },
+        { threshold: 0.12 },
+      );
+      document
+        .querySelectorAll(
+          ".reveal, .reveal-left, .reveal-right, .reveal-scale, .tl-item, .award-card, .event-card",
+        )
+        .forEach((el) => revealObs.observe(el));
+      document.querySelectorAll(".awards-grid .award-card").forEach((c, i) => {
+        c.style.transitionDelay = i * 0.08 + "s";
+      });
+      window.addEventListener(
+        "scroll",
+        () => {
+          updateProgress();
+          updateNav();
+          updateParallax();
+        },
+        { passive: true },
+      );
+      const cur = document.getElementById("cursor");
+      const ring = document.getElementById("cursorRing");
+      if (cur && ring) {
+        let rx = 0,
+          ry = 0;
+        document.addEventListener("mousemove", (e) => {
+          cur.style.left = e.clientX + "px";
+          cur.style.top = e.clientY + "px";
+          rx = e.clientX;
+          ry = e.clientY;
+        });
+        (function animRing() {
+          ring.style.left = rx + "px";
+          ring.style.top = ry + "px";
+          requestAnimationFrame(animRing);
+        })();
+        document
+          .querySelectorAll("a, button, .track-row, .event-card, .award-card")
+          .forEach((el) => {
+            el.addEventListener("mouseenter", () => {
+              cur.classList.add("hover");
+              ring.classList.add("hover");
             });
-          else startSimulation();
-        }
-        updateIcon();
-        updateBadge();
+            el.addEventListener("mouseleave", () => {
+              cur.classList.remove("hover");
+              ring.classList.remove("hover");
+            });
+          });
       }
-
-      function prevTrack() {
-        if (current === "https://www.youtube.com/embed/") return;
-        if (elapsed < 3)
-          playTrack((current - 1 + tracks.length) % tracks.length);
-        else {
-          elapsed = 0;
-          if (usingReal) audioEl.currentTime = 0;
-          else {
-            stopSimulation();
-            if (playing) startSimulation();
-          }
-          document.getElementById("pbFill").style.width = "0%";
-          document.getElementById("tElapsed").textContent = "0:00";
-        }
-      }
-
-      function nextTrack() {
-        playTrack((current + 1) % tracks.length);
-      }
-
-      function seekTrack(e) {
-        const bar = document.getElementById("pbBar");
-        const ratio = e.offsetX / bar.offsetWidth;
-        elapsed = ratio * duration;
-        document.getElementById("pbFill").style.width = ratio * 100 + "%";
-        document.getElementById("tElapsed").textContent = fmt(elapsed);
-        if (usingReal) audioEl.currentTime = elapsed;
-      }
-
-      function setVolume(val) {
-        audioEl.volume = val / 100;
-      }
-
-      function updateIcon() {
-        document.getElementById("playIcon").innerHTML = playing
-          ? '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>'
-          : '<polygon points="5 3 19 12 5 21"/>';
-      }
-
-      function updateBadge() {
-        const badge = document.getElementById("pbBadge");
-        badge.textContent = usingReal ? "audio" : "simulation";
-        badge.className = "pb-audio-badge " + (usingReal ? "real" : "sim");
-      }
-
-      /* ══════════════════════════════════════════
-       17. CONTACT FORM
-    ══════════════════════════════════════════ */
+      const hamburger = document.getElementById("hamburger");
+      const navMobile = document.getElementById("navMobile");
+      hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("open");
+        navMobile.classList.toggle("open");
+      });
+      document.querySelectorAll(".mobile-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          hamburger.classList.remove("open");
+          navMobile.classList.remove("open");
+        });
+      });
       const contactForm = document.getElementById("contactForm");
       const submitBtn = document.getElementById("submitBtn");
       const cfSuccess = document.getElementById("cfSuccess");
       const cfError = document.getElementById("cfError");
+      if (contactForm) {
+        contactForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const nom = contactForm.querySelector('[name="nom"]').value.trim();
+          const email = contactForm
+            .querySelector('[name="email"]')
+            .value.trim();
+          const message = contactForm
+            .querySelector('[name="message"]')
+            .value.trim();
+          if (!nom || !email || !message) return;
+          cfSuccess.classList.remove("visible");
+          cfError.classList.remove("visible");
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Envoi en cours…";
+          try {
+            const response = await fetch(contactForm.action, {
+              method: "POST",
+              body: new FormData(contactForm),
+              headers: { Accept: "application/json" },
+            });
+            if (response.ok) {
+              contactForm.reset();
+              cfSuccess.classList.add("visible");
+              cfSuccess.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest",
+              });
+            } else cfError.classList.add("visible");
+          } catch {
+            cfError.classList.add("visible");
+          } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `Envoyer la demande <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
+          }
+        });
+      }
 
-      contactForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const nom = contactForm.querySelector('[name="nom"]').value.trim();
-        const email = contactForm.querySelector('[name="email"]').value.trim();
-        const message = contactForm
-          .querySelector('[name="message"]')
-          .value.trim();
-        if (!nom || !email || !message) return;
-        cfSuccess.classList.remove("visible");
-        cfError.classList.remove("visible");
-        submitBtn.disabled = true;
-        submitBtn.textContent = "Envoi en cours…";
-        try {
-          const response = await fetch(contactForm.action, {
-            method: "POST",
-            body: new FormData(contactForm),
-            headers: { Accept: "application/json" },
-          });
-          if (response.ok) {
-            contactForm.reset();
-            cfSuccess.classList.add("visible");
-            cfSuccess.scrollIntoView({ behavior: "smooth", block: "nearest" });
-          } else cfError.classList.add("visible");
-        } catch {
-          cfError.classList.add("visible");
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = `Envoyer la demande <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
-        }
-      });
+      document
+        .getElementById("audioVoirPlusBtn")
+        ?.addEventListener("click", toggleAudioVoirPlus);
+      document
+        .getElementById("videoVoirPlusBtn")
+        ?.addEventListener("click", toggleVideoVoirPlus);
 
-      /* ══════════════════════════════════════════
-       INIT
-    ══════════════════════════════════════════ */
-      renderTracks();
+      renderAudioTracks();
+      renderVideoTracks();
+      initSonsTabs();
       updateProgress();
       updateNav();
+      window.carousel = new ImageCarousel([]);
     </script>
   </body>
 </html>
